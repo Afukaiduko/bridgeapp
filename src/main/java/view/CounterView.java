@@ -8,6 +8,8 @@ import java.awt.*;
 public class CounterView extends BaseView {
     private CounterModel model;
 
+    private LittlePanel littlePanel;
+
     private JLabel titleLabel;
     private JLabel counterLabel;
     private JButton incrementButton;
@@ -34,11 +36,15 @@ public class CounterView extends BaseView {
 
     public void updateCounterValue() {
         counterLabel.setText("Counter is " + model.getCounter());
+
+        // Make sure we update our simple subcomponents.
+        littlePanel.updateCounterValue();
     }
 
 
     @Override
-    public void onLoad() {
+    public void refresh() {
+        super.refresh();
         updateCounterValue();
     }
 
@@ -52,6 +58,10 @@ public class CounterView extends BaseView {
 
         switchToFastCounterButton = new JButton("Switch to Fast counting");
 
+        // Setup a sub component of this class. Make sure it's added as a subview so it's properly refreshed!
+        littlePanel = new LittlePanel(model);
+        this.registerSubView(littlePanel);
+
         // Setup the view.
         this.setLayout(new FlowLayout());
         this.add(titleLabel);
@@ -59,5 +69,6 @@ public class CounterView extends BaseView {
         this.add(incrementButton);
         this.add(decrementButton);
         this.add(switchToFastCounterButton);
+        this.add(littlePanel);
     }
 }

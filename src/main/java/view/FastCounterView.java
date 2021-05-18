@@ -45,7 +45,8 @@ public class FastCounterView extends BaseView {
     }
 
     @Override
-    public void onLoad() {
+    public void refresh() {
+        super.refresh();
         updateCounterValue();
     }
 

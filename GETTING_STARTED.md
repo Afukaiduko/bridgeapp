@@ -17,7 +17,7 @@ Here, we setup quite a few things:
     * Registering the panels
         * We let the window know which JPanels are available for it to display
         * Note that NOT all views must be registered - these are only the JPanels that show up as "main windows" of the
-          application
+          application. For example, see `LittlePanel`
     * Showing the actual window.
 
 ### IOManager
@@ -36,11 +36,12 @@ Here, the implementation follows the following logic:
   [IOManager](#iomanager) and loaded in [Start](#start)
 * The views have any models that they need in order to display their data.
     * They extend `BaseView`, which has two core functions:
-        * onLoad - this function is called by [MainWindow](#mainwindow) whenever the view is loaded. It is a good idea
+        * refresh - this function is called by [MainWindow](#mainwindow) whenever the view is loaded. It is a good idea
           to refresh the model if anything has changed
         * initializeView - This should be run manually to create the view for the first time.
             * Honestly this doesn't really belong in the abstract class, but I put this here as a reminder to have a
               function to setup the view initially
+        * registerSubView - Used to add subviews which are refreshed when their parent is refreshed.
 * The controllers handle any actions done on the view. They register listeners to various events that might happen and
   do the appropriate actions.
     * These actions can include: editing the model, modifying the view directly (ex making various elements show up or
