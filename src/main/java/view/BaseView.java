@@ -6,7 +6,7 @@ public abstract class BaseView extends JPanel {
     /**
      * Run when the panel is loaded.
      */
-    abstract void onLoad();
+    public abstract void onLoad();
 
     /**
      * Initializes the JPanel the first time

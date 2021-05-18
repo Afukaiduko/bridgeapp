@@ -1,11 +1,9 @@
 package controller;
 
-import view.MainWindow;
-
 public class BaseController {
-    protected MainWindow window;
+    protected MainWindowController controller;
 
-    public BaseController(MainWindow window) {
-        this.window = window;
+    public BaseController(MainWindowController controller) {
+        this.controller = controller;
     }
 }

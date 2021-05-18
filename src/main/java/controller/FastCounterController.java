@@ -5,7 +5,6 @@ import model.CounterModel;
 import utils.IntegerUtils;
 import view.CounterView;
 import view.FastCounterView;
-import view.MainWindow;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -17,8 +16,8 @@ public class FastCounterController extends BaseController {
 
     private int iCountBy;
 
-    public FastCounterController(MainWindow window, CounterModel model, FastCounterView view) {
-        super(window);
+    public FastCounterController(MainWindowController controller, CounterModel model, FastCounterView view) {
+        super(controller);
         this.model = model;
         this.view = view;
 
@@ -46,7 +45,7 @@ public class FastCounterController extends BaseController {
 
         view.getIncrementByField().setText("2"); // Setup the initial count to 2
 
-        view.getSwitchToCounterButton().addActionListener((evt) -> window.switchPanels(CounterView.class));
+        view.getSwitchToCounterButton().addActionListener((evt) -> controller.switchPanels(CounterView.class));
     }
 
     private void handleTextChange(DocumentEvent evt) {
