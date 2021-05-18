@@ -24,18 +24,6 @@ public class FastCounterView extends BaseView {
         initializeView();
     }
 
-    public JButton getSwitchToCounterButton() {
-        return switchToCounterButton;
-    }
-
-    public JTextField getIncrementByField() {
-        return incrementByField;
-    }
-
-    public JButton getIncrementButton() {
-        return incrementButton;
-    }
-
     public void updateCounterValue() {
         counterLabel.setText("Counter is " + model.getCounter());
     }
@@ -76,5 +64,17 @@ public class FastCounterView extends BaseView {
         CompUtils.add(switchToCounterButton, innerPanel, 0, 4, 2, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         CompUtils.add(innerPanel, this, 0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
+    }
+
+    public JButton getSwitchToCounterButton() {
+        return switchToCounterButton;
+    }
+
+    public JTextField getIncrementByField() {
+        return incrementByField;
+    }
+
+    public JButton getIncrementButton() {
+        return incrementButton;
     }
 }

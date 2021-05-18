@@ -33,8 +33,8 @@ public class Start {
             FastCounterController fastCounterController = new FastCounterController(controller, counterModel, fastCounterView);
 
 
-            controller.registerPanel(CounterView.class, counterView);
-            controller.registerPanel(FastCounterView.class, fastCounterView);
+            controller.registerScene(CounterView.class, counterView);
+            controller.registerScene(FastCounterView.class, fastCounterView);
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 // Do stuff before the app shuts down
@@ -45,7 +45,7 @@ public class Start {
 
 
             // Display the window
-            controller.switchPanels(CounterView.class);
+            controller.switchScene(CounterView.class);
             window.setVisible(true);
         });
     }

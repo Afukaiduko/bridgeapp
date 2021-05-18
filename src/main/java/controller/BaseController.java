@@ -1,6 +1,6 @@
 package controller;
 
-public class BaseController {
+public abstract class BaseController {
     protected MainWindowController controller;
 
     public BaseController(MainWindowController controller) {

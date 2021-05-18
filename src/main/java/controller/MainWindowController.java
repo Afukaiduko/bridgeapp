@@ -16,16 +16,16 @@ public class MainWindowController {
         viewsMap = new HashMap<>();
     }
 
-    public void registerPanel(Class className, BaseView view) {
-        viewsMap.put(className, view);
+    public void registerScene(Class className, BaseView scene) {
+        viewsMap.put(className, scene);
     }
 
-    public void switchPanels(Class className) {
-        BaseView view = viewsMap.get(className);
-        if (view != null) {
+    public void switchScene(Class className) {
+        BaseView scene = viewsMap.get(className);
+        if (scene != null) {
             SwingUtilities.invokeLater(() -> {
-                window.setContentPane(view);
-                view.refresh(); // Tell the view to refresh itself.
+                window.setContentPane(scene);
+                scene.refresh(); // Tell the view to refresh itself.
                 window.validate();
             });
         } else {

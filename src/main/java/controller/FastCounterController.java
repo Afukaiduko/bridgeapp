@@ -45,17 +45,17 @@ public class FastCounterController extends BaseController {
 
         view.getIncrementByField().setText("2"); // Setup the initial count to 2
 
-        view.getSwitchToCounterButton().addActionListener((evt) -> controller.switchPanels(CounterView.class));
+        view.getSwitchToCounterButton().addActionListener((evt) -> controller.switchScene(CounterView.class));
     }
 
     private void handleTextChange(DocumentEvent evt) {
-        String sIncBy = view.getIncrementByField().getText();
-        if (!IntegerUtils.isInteger(sIncBy)) {
+        String sIncrementBy = view.getIncrementByField().getText();
+        if (IntegerUtils.isInteger(sIncrementBy)) {
+            view.showNotIntegerWarning(false);
+            iCountBy = Integer.parseInt(sIncrementBy);
+        } else {
             view.showNotIntegerWarning(true);
             iCountBy = 0;
-        } else {
-            view.showNotIntegerWarning(false);
-            iCountBy = Integer.parseInt(sIncBy);
         }
 
     }

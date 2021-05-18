@@ -18,7 +18,7 @@ public class CounterController extends BaseController {
 
         view.getIncrementButton().addActionListener(this::handleIncrement);
         view.getDecrementButton().addActionListener(this::handleDecrement);
-        view.getSwitchToFastCounterButton().addActionListener((evt) -> controller.switchPanels(FastCounterView.class));
+        view.getSwitchToFastCounterButton().addActionListener((evt) -> controller.switchScene(FastCounterView.class));
     }
 
     private void handleIncrement(ActionEvent evt) {

@@ -15,8 +15,6 @@ public class MyReader {
             byte[] bytes = Files.readAllBytes(path);
 
             String contents = new String(bytes, "UTF-8");
-
-            System.out.println(contents);
             return contents;
         } catch (IOException e) {
             System.out.println("Could not read file " + fileName);

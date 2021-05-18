@@ -22,25 +22,12 @@ public class CounterView extends BaseView {
         initializeView();
     }
 
-    public JButton getIncrementButton() {
-        return incrementButton;
-    }
-
-    public JButton getDecrementButton() {
-        return decrementButton;
-    }
-
-    public JButton getSwitchToFastCounterButton() {
-        return switchToFastCounterButton;
-    }
-
     public void updateCounterValue() {
         counterLabel.setText("Counter is " + model.getCounter());
 
         // Make sure we update our simple subcomponents.
         littlePanel.updateCounterValue();
     }
-
 
     @Override
     public void refresh() {
@@ -52,7 +39,6 @@ public class CounterView extends BaseView {
     protected void initializeView() {
         titleLabel = new JLabel("Hello World!");
         counterLabel = new JLabel();
-        updateCounterValue(); // Initial value
         incrementButton = new JButton("Add 1");
         decrementButton = new JButton("Minus 1");
 
@@ -62,6 +48,8 @@ public class CounterView extends BaseView {
         littlePanel = new LittlePanel(model);
         this.registerSubView(littlePanel);
 
+        updateCounterValue(); // Initial value
+
         // Setup the view.
         this.setLayout(new FlowLayout());
         this.add(titleLabel);
@@ -70,5 +58,17 @@ public class CounterView extends BaseView {
         this.add(decrementButton);
         this.add(switchToFastCounterButton);
         this.add(littlePanel);
+    }
+
+    public JButton getIncrementButton() {
+        return incrementButton;
+    }
+
+    public JButton getDecrementButton() {
+        return decrementButton;
+    }
+
+    public JButton getSwitchToFastCounterButton() {
+        return switchToFastCounterButton;
     }
 }
