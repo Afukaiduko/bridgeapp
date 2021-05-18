@@ -1,0 +1,9 @@
+# Stuff NOT to include in GIT:
+
+# IntelliJ default files
+.idea/
+target/
+*.iml
+
+# Our Bridge app's output files
+bridgeapp/
