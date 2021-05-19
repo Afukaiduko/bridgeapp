@@ -16,8 +16,8 @@ public class FastCounterController extends BaseController {
 
     private int iCountBy;
 
-    public FastCounterController(MainWindowController controller, CounterModel model, FastCounterView view) {
-        super(controller);
+    public FastCounterController(MainWindowController mainWindowController, CounterModel model, FastCounterView view) {
+        super(mainWindowController);
         this.model = model;
         this.view = view;
 
@@ -45,7 +45,7 @@ public class FastCounterController extends BaseController {
 
         view.getIncrementByField().setText("2"); // Setup the initial count to 2
 
-        view.getSwitchToCounterButton().addActionListener((evt) -> controller.switchScene(CounterView.class));
+        view.getSwitchToCounterButton().addActionListener((evt) -> mainWindowController.switchScene(CounterView.class));
     }
 
     private void handleTextChange(DocumentEvent evt) {

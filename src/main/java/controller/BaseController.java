@@ -1,9 +1,9 @@
 package controller;
 
 public abstract class BaseController {
-    protected MainWindowController controller;
+    protected MainWindowController mainWindowController;
 
-    public BaseController(MainWindowController controller) {
-        this.controller = controller;
+    public BaseController(MainWindowController mainWindowController) {
+        this.mainWindowController = mainWindowController;
     }
 }

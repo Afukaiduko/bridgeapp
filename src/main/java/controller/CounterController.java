@@ -11,14 +11,14 @@ public class CounterController extends BaseController {
     private CounterModel model;
     private CounterView view;
 
-    public CounterController(MainWindowController controller, CounterModel model, CounterView view) {
-        super(controller);
+    public CounterController(MainWindowController mainWindowController, CounterModel model, CounterView view) {
+        super(mainWindowController);
         this.model = model;
         this.view = view;
 
         view.getIncrementButton().addActionListener(this::handleIncrement);
         view.getDecrementButton().addActionListener(this::handleDecrement);
-        view.getSwitchToFastCounterButton().addActionListener((evt) -> controller.switchScene(FastCounterView.class));
+        view.getSwitchToFastCounterButton().addActionListener((evt) -> mainWindowController.switchScene(FastCounterView.class));
     }
 
     private void handleIncrement(ActionEvent evt) {
