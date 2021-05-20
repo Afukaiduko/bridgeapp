@@ -3,6 +3,7 @@ package controller;
 import model.CounterModel;
 import view.CounterView;
 import view.FastCounterView;
+import view.HomeView;
 
 import java.awt.event.ActionEvent;
 
@@ -19,6 +20,8 @@ public class CounterController extends BaseController {
         view.getIncrementButton().addActionListener(this::handleIncrement);
         view.getDecrementButton().addActionListener(this::handleDecrement);
         view.getSwitchToFastCounterButton().addActionListener((evt) -> mainWindowController.switchScene(FastCounterView.class));
+
+        view.getBridgeButton().addActionListener((evt) -> mainWindowController.switchScene(HomeView.class));
     }
 
     private void handleIncrement(ActionEvent evt) {

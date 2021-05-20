@@ -17,6 +17,8 @@ public class CounterView extends BaseView {
 
     private JButton switchToFastCounterButton;
 
+    private JButton bridgeButton;
+
     public CounterView(CounterModel model) {
         this.model = model;
         initializeView();
@@ -44,6 +46,8 @@ public class CounterView extends BaseView {
 
         switchToFastCounterButton = new JButton("Switch to Fast counting");
 
+        bridgeButton = new JButton("swtich to bridge");
+
         // Setup a sub component of this class. Make sure it's added as a subview so it's properly refreshed!
         littlePanel = new LittlePanel(model);
         this.registerSubView(littlePanel);
@@ -58,6 +62,7 @@ public class CounterView extends BaseView {
         this.add(decrementButton);
         this.add(switchToFastCounterButton);
         this.add(littlePanel);
+        this.add(bridgeButton);
     }
 
     public JButton getIncrementButton() {
@@ -71,4 +76,6 @@ public class CounterView extends BaseView {
     public JButton getSwitchToFastCounterButton() {
         return switchToFastCounterButton;
     }
+
+    public JButton getBridgeButton(){return bridgeButton;}
 }
