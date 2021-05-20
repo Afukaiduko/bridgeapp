@@ -1,4 +1,5 @@
 package enums;
 
-public class Direction {
+public enum Direction {
+    NS,EW
 }

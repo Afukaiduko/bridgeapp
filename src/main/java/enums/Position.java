@@ -1,4 +1,5 @@
 package enums;
 
-public class Position {
+public enum Position {
+    NORTH, SOUTH, EAST, WEST
 }

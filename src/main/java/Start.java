@@ -6,6 +6,7 @@ import io.IOManager;
 import model.CounterModel;
 import view.CounterView;
 import view.FastCounterView;
+import view.HomeView;
 import view.MainWindow;
 
 import javax.swing.*;
@@ -32,6 +33,8 @@ public class Start {
             FastCounterView fastCounterView = new FastCounterView(counterModel);
             FastCounterController fastCounterController = new FastCounterController(controller, counterModel, fastCounterView);
 
+
+            HomeView homeview = new HomeView();
 
             controller.registerScene(CounterView.class, counterView);
             controller.registerScene(FastCounterView.class, fastCounterView);
