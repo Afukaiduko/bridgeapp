@@ -3,6 +3,7 @@ package io;
 import com.google.gson.Gson;
 import constants.Constants;
 import model.CounterModel;
+import model.PlayerDatabase;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,5 +45,28 @@ public class IOManager {
         writer.write(Constants.SAVE_DIRECTORY, Constants.COUNTER_FILE, json);
     }
 
+    public PlayerDatabase readPlayerDatabaseModel(){
+        Path path = Paths.get(Constants.PLAYERS_SAVE_DIRECTORY, Constants.PLAYERS_FILE);
+        if (!Files.exists(path)) {
+            System.out.println("Players file does not exist, creating new one");
+            // File does not exist, let's create a default one.
+            savePlayerDatabaseModel(new PlayerDatabase());
+        }
 
+        String json = reader.readFromFile(Constants.PLAYERS_SAVE_DIRECTORY, Constants.PLAYERS_FILE);
+
+        // Convert json string to model
+        PlayerDatabase model = gson.fromJson(json, PlayerDatabase.class);
+        System.out.println(json);
+        System.out.println(model.getNumberOfPlayers());
+        return model; // Technically can combine with above line, but writing explicitly here as an example to be more clear
+    }
+
+    public void savePlayerDatabaseModel(PlayerDatabase model) {
+        // Convert Java object type to JSON string.
+        String json = gson.toJson(model);
+
+        // Write the json.
+        writer.write(Constants.PLAYERS_SAVE_DIRECTORY, Constants.PLAYERS_FILE, json);
+    }
 }
