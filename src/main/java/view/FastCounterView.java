@@ -38,6 +38,7 @@ public class FastCounterView extends BaseView {
         updateCounterValue();
     }
 
+    @Override
     protected void initializeView() {
         titleLabel = new JLabel("Hello World!");
 

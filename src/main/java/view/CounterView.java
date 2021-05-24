@@ -1,5 +1,6 @@
 package view;
 
+import enums.Suit;
 import model.CounterModel;
 
 import javax.swing.*;
@@ -63,6 +64,28 @@ public class CounterView extends BaseView {
         this.add(switchToFastCounterButton);
         this.add(littlePanel);
         this.add(bridgeButton);
+
+
+        // Test code for demonstrating drag and drop cards
+        CardHolderExampleView cardPanel1 = new CardHolderExampleView();
+        CardHolderExampleView cardPanel2 = new CardHolderExampleView();
+
+        CardView c1 = new CardView(Suit.DIAMOND, 13);
+        CardView c2 = new CardView(Suit.HEART, 2);
+        CardView c3 = new CardView(Suit.CLUB, 5);
+        CardView c4 = new CardView(Suit.SPADE, 3);
+        CardView c5 = new CardView(Suit.HEART, 7);
+        cardPanel1.acceptCard(c1);
+        cardPanel2.acceptCard(c2);
+        cardPanel1.acceptCard(c3);
+        cardPanel1.acceptCard(c4);
+        cardPanel2.acceptCard(c5);
+        cardPanel1.setPreferredSize(new Dimension(300, 300));
+        cardPanel1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        cardPanel2.setPreferredSize(new Dimension(300, 300));
+        cardPanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.add(cardPanel1);
+        this.add(cardPanel2);
     }
 
     public JButton getIncrementButton() {
