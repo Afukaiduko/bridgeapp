@@ -1,4 +1,9 @@
 package view;
 
-public class BiddingView {
+public class BiddingView extends BaseView{
+
+    @Override
+    public void initializeView(){
+
+    }
 }

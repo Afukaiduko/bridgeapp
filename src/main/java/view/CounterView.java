@@ -1,7 +1,9 @@
 package view;
 
+import enums.Rank;
 import enums.Suit;
 import model.CounterModel;
+import utils.CardImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,7 @@ public class CounterView extends BaseView {
     private JButton switchToFastCounterButton;
 
     private JButton bridgeButton;
+    private JButton testBidButton;
 
     public CounterView(CounterModel model) {
         this.model = model;
@@ -49,6 +52,10 @@ public class CounterView extends BaseView {
 
         bridgeButton = new JButton("swtich to bridge");
 
+        Image suitImg = CardImageLoader.getInstance().getSuitImg(Suit.HEART);
+        ImageIcon heart = new ImageIcon(suitImg);
+        testBidButton = new JButton("1",heart);
+
         // Setup a sub component of this class. Make sure it's added as a subview so it's properly refreshed!
         littlePanel = new LittlePanel(model);
         this.registerSubView(littlePanel);
@@ -64,17 +71,18 @@ public class CounterView extends BaseView {
         this.add(switchToFastCounterButton);
         this.add(littlePanel);
         this.add(bridgeButton);
+        this.add(testBidButton);
 
 
         // Test code for demonstrating drag and drop cards
         CardHolderExampleView cardPanel1 = new CardHolderExampleView();
         CardHolderExampleView cardPanel2 = new CardHolderExampleView();
 
-        CardView c1 = new CardView(Suit.DIAMOND, 13);
-        CardView c2 = new CardView(Suit.HEART, 2);
-        CardView c3 = new CardView(Suit.CLUB, 5);
-        CardView c4 = new CardView(Suit.SPADE, 3);
-        CardView c5 = new CardView(Suit.HEART, 7);
+        CardView c1 = new CardView(Suit.DIAMOND, Rank.KING);
+        CardView c2 = new CardView(Suit.HEART, Rank.TWO);
+        CardView c3 = new CardView(Suit.CLUB, Rank.FIVE);
+        CardView c4 = new CardView(Suit.SPADE, Rank.THREE);
+        CardView c5 = new CardView(Suit.HEART, Rank.SEVEN);
         cardPanel1.acceptCard(c1);
         cardPanel2.acceptCard(c2);
         cardPanel1.acceptCard(c3);

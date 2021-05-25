@@ -1,9 +1,7 @@
 import com.formdev.flatlaf.FlatLightLaf;
 import controller.*;
 import io.IOManager;
-import model.CounterModel;
-import model.PlayerDatabase;
-import model.SeatingOrderModel;
+import model.*;
 import view.*;
 
 import javax.swing.*;
@@ -36,13 +34,18 @@ public class Start {
             HomeController homeController = new HomeController(controller, homeView);
 
             SeatingOrderModel seatingOrderModel = new SeatingOrderModel(playerDatabase);
-            SeatingSetupView seatingSetupView = new SeatingSetupView(seatingOrderModel, playerDatabase);
+            SeatingSetupView seatingSetupView = new SeatingSetupView(playerDatabase);
             SeatingSetupController seatingSetupController = new SeatingSetupController(controller, playerDatabase, seatingSetupView, seatingOrderModel);
+
+            BiddingModel biddingModel = new BiddingModel();
+            BiddingView biddingView = new BiddingView();
+            BiddingController biddingController = new BiddingController();
 
             controller.registerScene(CounterView.class, counterView);
             controller.registerScene(FastCounterView.class, fastCounterView);
             controller.registerScene(HomeView.class, homeView);
             controller.registerScene(SeatingSetupView.class, seatingSetupView);
+            controller.registerScene(BiddingView.class, biddingView);
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 // Do stuff before the app shuts down

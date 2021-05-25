@@ -10,7 +10,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class SeatingSetupView extends BaseView {
-    private SeatingOrderModel model;
     private PlayerDatabase playerDatabase;
 
     private JLabel titleLabel;
@@ -36,8 +35,7 @@ public class SeatingSetupView extends BaseView {
 
     private JButton nextButton;
 
-    public SeatingSetupView(SeatingOrderModel model, PlayerDatabase players){
-        this.model = model;
+    public SeatingSetupView(PlayerDatabase players){
         this.playerDatabase = players;
         initializeView();
     }
@@ -45,6 +43,8 @@ public class SeatingSetupView extends BaseView {
     public void initializeView(){
 
         titleLabel = new JLabel("Seating Order");
+
+        nextButton = new JButton("Next");
 
         north = new JLabel("North");
         east = new JLabel("East");
@@ -74,6 +74,7 @@ public class SeatingSetupView extends BaseView {
         addPlayerButton = new JButton("Enter");
 
         CompUtils.add(titleLabel, this,0,0,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(nextButton, this,1,0,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         CompUtils.add(north,innerPanel,1,0,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(east,innerPanel,1,1,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
@@ -93,27 +94,27 @@ public class SeatingSetupView extends BaseView {
         CompUtils.add(innerPanel,this,0,1,1,1,1,1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
 
         CompUtils.add(registerNewPlayerLabel, this,0,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(newPlayerTF, this,1,2,1,1,3,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(newPlayerTF, this,1,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(addPlayerButton, this,2,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         initializePlayerComboBox();
     }
 
     public void initializePlayerComboBox() {
-        ArrayList<Player> players = playerDatabase.getPlayers();
+        ArrayList<Player> players = (ArrayList<Player>) playerDatabase.getPlayers();
         for (Player player : players) {
-            cbxNorth.addItem(player.getName());
-            cbxEast.addItem(player.getName());
-            cbxSouth.addItem(player.getName());
-            cbxWest.addItem(player.getName());
+            cbxNorth.addItem(player);
+            cbxEast.addItem(player);
+            cbxSouth.addItem(player);
+            cbxWest.addItem(player);
         }
     }
 
     public void addLatestPlayerToComboBox(){
-        cbxNorth.addItem(playerDatabase.getLatestPlayer().getName());
-        cbxEast.addItem(playerDatabase.getLatestPlayer().getName());
-        cbxSouth.addItem(playerDatabase.getLatestPlayer().getName());
-        cbxWest.addItem(playerDatabase.getLatestPlayer().getName());
+        cbxNorth.addItem(playerDatabase.getLatestPlayer());
+        cbxEast.addItem(playerDatabase.getLatestPlayer());
+        cbxSouth.addItem(playerDatabase.getLatestPlayer());
+        cbxWest.addItem(playerDatabase.getLatestPlayer());
     }
 
     public JRadioButton getNorthButton(){
@@ -138,5 +139,25 @@ public class SeatingSetupView extends BaseView {
 
     public JButton getAddPlayerButton(){
         return addPlayerButton;
+    }
+
+    public JButton getNextButton(){
+        return nextButton;
+    }
+
+    public JComboBox getCbxNorth(){
+        return cbxNorth;
+    }
+
+    public JComboBox getCbxEast(){
+        return cbxEast;
+    }
+
+    public JComboBox getCbxSouth(){
+        return cbxSouth;
+    }
+
+    public JComboBox getCbxWest() {
+        return cbxWest;
     }
 }

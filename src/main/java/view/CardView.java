@@ -2,6 +2,7 @@ package view;
 
 import constants.Constants;
 import dnd.CardDraggedListener;
+import enums.Rank;
 import enums.Suit;
 import utils.CardImageLoader;
 import utils.CardUtils;
@@ -14,11 +15,11 @@ import java.util.Objects;
 
 public class CardView extends JLabel implements Comparable {
     private Suit suit;
-    private int number; // TODO This probably can be an enum then you don't need the CardUtils to convert the number.
+    private Rank rank; // TODO This probably can be an enum then you don't need the CardUtils to convert the number.
 
-    public CardView(Suit suit, int number) {
+    public CardView(Suit suit, Rank rank) {
         this.suit = suit;
-        this.number = number;
+        this.rank = rank;
         initializeView();
 
         // Enable Drag of the Card
@@ -43,7 +44,7 @@ public class CardView extends JLabel implements Comparable {
 
         Image suitImg = CardImageLoader.getInstance().getSuitImg(suit);
         this.setIcon(new ImageIcon(suitImg));
-        this.setText(CardUtils.convertNumberToCardText(number));
+        this.setText(CardUtils.convertRankToCardText(rank));
 
     }
 
@@ -51,8 +52,8 @@ public class CardView extends JLabel implements Comparable {
         return suit;
     }
 
-    public int getNumber() {
-        return number;
+    public Rank getRank() {
+        return rank;
     }
 
     @Override
@@ -60,12 +61,12 @@ public class CardView extends JLabel implements Comparable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CardView cardView = (CardView) o;
-        return number == cardView.number && suit == cardView.suit;
+        return rank == cardView.rank && suit == cardView.suit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(suit, number);
+        return Objects.hash(suit, rank);
     }
 
     @Override

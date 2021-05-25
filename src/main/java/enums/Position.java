@@ -1,5 +1,5 @@
 package enums;
 
 public enum Position {
-    NORTH, SOUTH, EAST, WEST
+    NORTH, EAST, SOUTH, WEST
 }

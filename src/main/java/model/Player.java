@@ -17,4 +17,22 @@ public class Player {
     public String getName(){
         return name;
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object anObject){
+        if(this == anObject){
+            return true;
+        }
+        if(anObject instanceof Player){
+            if(this.getID() == ((Player) anObject).getID()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

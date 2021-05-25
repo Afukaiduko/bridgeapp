@@ -1,5 +1,5 @@
 package enums;
 
 public enum Suit {
-    CLUB, DIAMOND, HEART, SPADE
+    SPADE, HEART, DIAMOND, CLUB
 }

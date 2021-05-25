@@ -1,21 +1,39 @@
 package utils;
 
+import enums.Rank;
 import view.CardView;
 
 public class CardUtils {
-    public static String convertNumberToCardText(int number) {
-        switch (number) {
-            case 1:
+    public static String convertRankToCardText(Rank rank) {
+        switch (rank) {
+            case ACE:
                 return "A";
-            case 11:
-                return "J";
-            case 12:
-                return "Q";
-            case 13:
+            case KING:
                 return "K";
-            default:
-                return String.valueOf(number);
+            case QUEEN:
+                return "Q";
+            case JACK:
+                return "J";
+            case TEN:
+                return "10";
+            case NINE:
+                return "9";
+            case EIGHT:
+                return "8";
+            case SEVEN:
+                return "7";
+            case SIX:
+                return "6";
+            case FIVE:
+                return "5";
+            case FOUR:
+                return "4";
+            case THREE:
+                return "3";
+            case TWO:
+                return "2";
         }
+        return "help";
     }
 
     /**
@@ -27,6 +45,6 @@ public class CardUtils {
         if (stCompare != 0) {
             return stCompare;
         }
-        return c1.getNumber() - c2.getNumber();// TODO change this to enum to sort properly. Otherwise Ace is first right now
+        return c1.getRank().compareTo(c2.getRank());// TODO change this to enum to sort properly. Otherwise Ace is first right now
     }
 }

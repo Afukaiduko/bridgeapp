@@ -1,9 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerDatabase {
-    ArrayList<Player>  players;
+    List<Player> players;
 
     public PlayerDatabase() {
         players  = new ArrayList<>();
@@ -13,7 +14,7 @@ public class PlayerDatabase {
         return players.size();
     }
 
-    public ArrayList<Player> getPlayers(){
+    public List<Player> getPlayers(){
         return players;
     }
 
