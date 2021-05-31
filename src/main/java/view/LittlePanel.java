@@ -28,6 +28,11 @@ public class LittlePanel extends BaseView {
         this.add(label);
     }
 
+    @Override
+    public void onLoadedView(){
+
+    }
+
     public void updateCounterValue() {
         label.setText("I am a little view that updates too! Counter is at - " + model.getCounter());
     }

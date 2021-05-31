@@ -26,4 +26,6 @@ public abstract class BaseView extends JPanel {
      * Initializes the JPanel the first time
      */
     protected abstract void initializeView();
+
+    public abstract void onLoadedView();
 }

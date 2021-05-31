@@ -2,7 +2,6 @@ package view;
 
 import model.Player;
 import model.PlayerDatabase;
-import model.SeatingOrderModel;
 import utils.CompUtils;
 
 import javax.swing.*;
@@ -40,6 +39,7 @@ public class SeatingSetupView extends BaseView {
         initializeView();
     }
 
+    @Override
     public void initializeView(){
 
         titleLabel = new JLabel("Seating Order");
@@ -98,6 +98,11 @@ public class SeatingSetupView extends BaseView {
         CompUtils.add(addPlayerButton, this,2,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         initializePlayerComboBox();
+    }
+
+    @Override
+    public void onLoadedView(){
+
     }
 
     public void initializePlayerComboBox() {

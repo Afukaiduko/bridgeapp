@@ -31,6 +31,11 @@ public class HomeView extends BaseView {
         CompUtils.add(innerPanel, this, 0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 200, 200, 200, 200);
     }
 
+    @Override
+    public void onLoadedView(){
+
+    }
+
     public JButton getNewGameButton(){
         return newGameButton;
     }

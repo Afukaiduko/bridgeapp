@@ -67,6 +67,11 @@ public class FastCounterView extends BaseView {
         CompUtils.add(innerPanel, this, 0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
     }
 
+    @Override
+    public void onLoadedView(){
+
+    }
+
     public JButton getSwitchToCounterButton() {
         return switchToCounterButton;
     }

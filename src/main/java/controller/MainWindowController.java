@@ -25,6 +25,7 @@ public class MainWindowController {
         if (scene != null) {
             SwingUtilities.invokeLater(() -> {
                 window.setContentPane(scene);
+                scene.onLoadedView();
                 scene.refresh(); // Tell the view to refresh itself.
                 window.validate();
             });

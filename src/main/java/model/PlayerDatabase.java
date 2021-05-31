@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerDatabase {
-    List<Player> players;
+    private List<Player> players;
 
     public PlayerDatabase() {
         players  = new ArrayList<>();

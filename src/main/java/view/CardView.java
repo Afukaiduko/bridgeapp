@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class CardView extends JLabel implements Comparable {
     private Suit suit;
-    private Rank rank; // TODO This probably can be an enum then you don't need the CardUtils to convert the number.
+    private Rank rank;
 
     public CardView(Suit suit, Rank rank) {
         this.suit = suit;
@@ -44,7 +44,7 @@ public class CardView extends JLabel implements Comparable {
 
         Image suitImg = CardImageLoader.getInstance().getSuitImg(suit);
         this.setIcon(new ImageIcon(suitImg));
-        this.setText(CardUtils.convertRankToCardText(rank));
+        this.setText(rank.getDisplayName());
 
     }
 

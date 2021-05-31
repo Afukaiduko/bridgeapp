@@ -34,6 +34,11 @@ public class CardHolderExampleView extends CardHolder {
         reloadCards();
     }
 
+    @Override
+    public void onLoadedView(){
+
+    }
+
     private void reloadCards() {
         SwingUtilities.invokeLater(() -> {
             this.removeAll();

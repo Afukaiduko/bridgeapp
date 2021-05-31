@@ -73,6 +73,8 @@ public class CounterView extends BaseView {
         this.add(bridgeButton);
         this.add(testBidButton);
 
+        testBidButton.setEnabled(false);
+
 
         // Test code for demonstrating drag and drop cards
         CardHolderExampleView cardPanel1 = new CardHolderExampleView();
@@ -94,6 +96,10 @@ public class CounterView extends BaseView {
         cardPanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.add(cardPanel1);
         this.add(cardPanel2);
+    }
+    @Override
+    public void onLoadedView(){
+
     }
 
     public JButton getIncrementButton() {
