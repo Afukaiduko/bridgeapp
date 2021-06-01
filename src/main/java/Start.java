@@ -38,7 +38,7 @@ public class Start {
             SeatingSetupController seatingSetupController = new SeatingSetupController(controller, playerDatabase, seatingSetupView, seatingOrderModel);
 
             BiddingModel biddingModel = new BiddingModel();
-            BiddingView biddingView = new BiddingView(seatingOrderModel);
+            BiddingView biddingView = new BiddingView(biddingModel, seatingOrderModel);
             BiddingController biddingController = new BiddingController(controller, biddingModel, biddingView, seatingOrderModel);
 
             controller.registerScene(CounterView.class, counterView);

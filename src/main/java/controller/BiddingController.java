@@ -35,7 +35,10 @@ public class BiddingController extends BaseController{
     private void normalBidButton(ActionEvent e){
         int bidIndex = indexOfPressedButton(e);
         if(bidIndex != -1){
-            view.setLatestBid((Bid)view.getPossibleNormalBids().get(bidIndex));
+            Bid latestBid = (Bid)view.getPossibleNormalBids().get(bidIndex);
+            view.setLatestBid(latestBid);
+            model.addBid(latestBid);
+            view.setIncrementRowBy();
             view.refresh();
         }
     }
