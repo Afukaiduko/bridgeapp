@@ -17,4 +17,16 @@ public class BiddingModel {
     public List getBiddingSequence(){
         return biddingSequence;
     }
+
+    public Bid get(int index){
+        return biddingSequence.get(index);
+    }
+
+    public int getLastIndex(){
+        return biddingSequence.size()-1;
+    }
+
+    public void remove(int index){
+        biddingSequence.remove(index);
+    }
 }

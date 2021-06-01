@@ -21,6 +21,7 @@ public class BiddingView extends BaseView{
     private JPanel innerPanel;
     private JPanel playersPanel;
     private JPanel normalBidsPanel;
+    private JPanel undoDoublePassPanel;
 
     private JLabel north;
     private JLabel east;
@@ -39,6 +40,10 @@ public class BiddingView extends BaseView{
     private int shiftStarting;
 
     private Bid latestBid;
+
+    private JButton undoButton;
+    private JButton doubleButton;
+    private JButton passButton;
 
     public BiddingView(BiddingModel biddingModel, SeatingOrderModel seatingOrderModel){
         this.seatingOrderModel = seatingOrderModel;
@@ -75,20 +80,30 @@ public class BiddingView extends BaseView{
         south = new JLabel("South");
         west = new JLabel("West");
 
+        undoButton = new JButton("Undo");
+        doubleButton = new JButton("Double");
+        passButton = new JButton("Pass");
+
         innerPanel = new JPanel();
         playersPanel = new JPanel();
         normalBidsPanel = new JPanel();
+        undoDoublePassPanel = new JPanel();
 
         CompUtils.add(north, playersPanel,0,2,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(east, playersPanel,1,2,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(south, playersPanel,2,2,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(west, playersPanel,3,2,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
+        CompUtils.add(undoButton, undoDoublePassPanel,0,0,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(doubleButton, undoDoublePassPanel,1,0,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(passButton, undoDoublePassPanel,2,0,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+
         createBidButtons();
         createBidLabels();
 
         CompUtils.add(playersPanel, innerPanel,0,0,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(normalBidsPanel, innerPanel,0,1,1,1,1,1,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER);
+        CompUtils.add(undoDoublePassPanel,innerPanel,0,2,1,1,1,1,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER);
         CompUtils.add(innerPanel,this,0,1,1,1,1,1,GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
 
     }
@@ -172,21 +187,28 @@ public class BiddingView extends BaseView{
         while(iterator.hasNext()){
             Map.Entry<JButton, Integer> entry = iterator.next();
             CompUtils.add(entry.getKey(), normalBidsPanel, entry.getValue()/5, entry.getValue()%5 + incrementRowBy, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-            if(entry.getValue() <= possibleNormalBids.indexOf((NormalBid)latestBid)){
+            if(latestBid == null){
+                entry.getKey().setEnabled(true);
+            }
+            else if(entry.getValue() <= possibleNormalBids.indexOf((NormalBid)latestBid)){
                 entry.getKey().setEnabled(false);
+            } else {
+                entry.getKey().setEnabled(true);
             }
         }
     }
 
     private void updateBidSequence(){
 
-        if(latestBid !=null){
-            if(latestBid instanceof NormalBid){
-                CompUtils.add(bidLabels.get(possibleNormalBids.indexOf((NormalBid)latestBid)), playersPanel, (biddingModel.getBiddingSequence().size()-1+shiftStarting)%4, (biddingModel.getBiddingSequence().size()-1+shiftStarting)/4+3 ,1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        ArrayList<Bid> bidSequence = (ArrayList<Bid>) biddingModel.getBiddingSequence();
+        for(int i = 0; i < bidSequence.size(); i++){
+            Bid current= bidSequence.get(i);
+            if(current instanceof NormalBid){
+                CompUtils.add(bidLabels.get(possibleNormalBids.indexOf((NormalBid)current)), playersPanel, (i+shiftStarting)%4,(i+shiftStarting)/4+3,1,1,1,1,GridBagConstraints.HORIZONTAL,GridBagConstraints.CENTER);
             }
-            revalidate();
-            repaint();
         }
+        revalidate();
+        repaint();
     }
 
     public void setIncrementRowBy(){
@@ -200,8 +222,13 @@ public class BiddingView extends BaseView{
     @Override
     public void refresh(){
         super.refresh();
+        setIncrementRowBy();
         updateBidButtons();
         updateBidSequence();
+    }
+
+    public void removeLatestBid(){
+        playersPanel.remove(bidLabels.get(possibleNormalBids.indexOf((NormalBid)latestBid)));
     }
 
     public void setLatestBid(Bid latestBid){
@@ -214,5 +241,17 @@ public class BiddingView extends BaseView{
 
     public ArrayList getPossibleNormalBids(){
         return possibleNormalBids;
+    }
+
+    public JButton getUndoButton(){
+        return undoButton;
+    }
+
+    public JButton getDoubleButton(){
+        return doubleButton;
+    }
+
+    public JButton getPassButton(){
+        return passButton;
     }
 }

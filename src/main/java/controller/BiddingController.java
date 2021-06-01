@@ -19,7 +19,22 @@ public class BiddingController extends BaseController{
         this.view = biddingView;
         this.seatingOrder = seatingOrderModel;
 
+        view.getUndoButton().addActionListener(this::handleUndoButton);
         addListenersToNormalBidButtons();
+    }
+
+    private void handleUndoButton(ActionEvent e){
+        int lastIndex = model.getLastIndex();
+        if(lastIndex > -1){
+            view.removeLatestBid();
+            if(lastIndex > 0) {
+                view.setLatestBid(model.get(lastIndex - 1));
+            } else {
+                view.setLatestBid(null);
+            }
+            model.remove(lastIndex);
+        }
+        view.refresh();
     }
 
     private void addListenersToNormalBidButtons(){
@@ -28,17 +43,16 @@ public class BiddingController extends BaseController{
 
         while(iterator.hasNext()) {
             Map.Entry<JButton, Integer> entry = iterator.next();
-            entry.getKey().addActionListener(this::normalBidButton);
+            entry.getKey().addActionListener(this::handleNormalBidButton);
         }
     }
 
-    private void normalBidButton(ActionEvent e){
+    private void handleNormalBidButton(ActionEvent e){
         int bidIndex = indexOfPressedButton(e);
         if(bidIndex != -1){
-            Bid latestBid = (Bid)view.getPossibleNormalBids().get(bidIndex);
-            view.setLatestBid(latestBid);
-            model.addBid(latestBid);
-            view.setIncrementRowBy();
+            Bid bidClicked = (Bid)view.getPossibleNormalBids().get(bidIndex);
+            model.addBid(bidClicked);
+            view.setLatestBid(bidClicked);
             view.refresh();
         }
     }
