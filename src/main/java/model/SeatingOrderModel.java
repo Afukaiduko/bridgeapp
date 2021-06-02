@@ -47,7 +47,7 @@ public class SeatingOrderModel {
         playerPositions.put(position, player);
     }
 
-    public Map getPlayerPositionsMap(){
+    public Map<Position, Player> getPlayerPositionsMap(){
         return playerPositions;
     }
 }

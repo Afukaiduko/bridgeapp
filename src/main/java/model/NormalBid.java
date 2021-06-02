@@ -1,16 +1,33 @@
 package model;
 
 import enums.Suit;
+import utils.CardImageLoader;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class NormalBid extends Bid{
     private Suit suit;
     private int callNumber;
+    private JLabel normalLabel;
 
     public NormalBid(int callNumber, Suit suit){
         this.callNumber = callNumber;
         this.suit = suit;
+        createLabel();
     }
 
+    public void createLabel(){
+        if (this.getSuit() == Suit.NO_TRUMP) {
+            normalLabel = new JLabel("" + this.getCallNumber() + "NT");
+        } else {
+            Image currentSuitImg = CardImageLoader.getInstance().getSuitImg(this.getSuit());
+            ImageIcon currentSuit = new ImageIcon(currentSuitImg);
+
+            normalLabel = new JLabel("" + this.getCallNumber());
+            normalLabel.setIcon(currentSuit);
+        }
+    }
     public Suit getSuit(){
         return suit;
     }
@@ -35,5 +52,10 @@ public class NormalBid extends Bid{
             }
         }
         return false;
+    }
+
+    //can probably not use arraylist of labels
+    public JLabel getLabel(){
+        return normalLabel;
     }
 }

@@ -39,7 +39,7 @@ public class Start {
 
             BiddingModel biddingModel = new BiddingModel();
             BiddingView biddingView = new BiddingView(biddingModel, seatingOrderModel);
-            BiddingController biddingController = new BiddingController(controller, biddingModel, biddingView, seatingOrderModel);
+            BiddingController biddingController = new BiddingController(controller, biddingModel, biddingView);
 
             controller.registerScene(CounterView.class, counterView);
             controller.registerScene(FastCounterView.class, fastCounterView);
