@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 
 
 public class CounterController extends BaseController {
-    private CounterModel model;
-    private CounterView view;
+    private final CounterModel model;
+    private final CounterView view;
 
     public CounterController(MainWindowController mainWindowController, CounterModel model, CounterView view) {
         super(mainWindowController);

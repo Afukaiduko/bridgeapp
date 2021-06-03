@@ -10,9 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class IOManager {
-    private Gson gson;
-    private MyReader reader;
-    private MyWriter writer;
+    private final Gson gson;
+    private final MyReader reader;
+    private final MyWriter writer;
 
     public IOManager() {
         gson = new Gson();
@@ -45,7 +45,7 @@ public class IOManager {
         writer.write(Constants.SAVE_DIRECTORY, Constants.COUNTER_FILE, json);
     }
 
-    public PlayerDatabase readPlayerDatabaseModel(){
+    public PlayerDatabase readPlayerDatabaseModel() {
         Path path = Paths.get(Constants.PLAYERS_SAVE_DIRECTORY, Constants.PLAYERS_FILE);
         if (!Files.exists(path)) {
             System.out.println("Players file does not exist, creating new one");

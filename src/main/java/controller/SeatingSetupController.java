@@ -9,13 +9,13 @@ import view.SeatingSetupView;
 
 import java.awt.event.ActionEvent;
 
-public class SeatingSetupController extends BaseController{
+public class SeatingSetupController extends BaseController {
 
-    private PlayerDatabase players;
-    private SeatingSetupView view;
-    private SeatingOrderModel model;
+    private final PlayerDatabase players;
+    private final SeatingSetupView view;
+    private final SeatingOrderModel model;
 
-    public SeatingSetupController(MainWindowController mainWindowController, PlayerDatabase players, SeatingSetupView view, SeatingOrderModel model){
+    public SeatingSetupController(MainWindowController mainWindowController, PlayerDatabase players, SeatingSetupView view, SeatingOrderModel model) {
         super(mainWindowController);
         this.model = model;
         this.view = view;
@@ -25,7 +25,7 @@ public class SeatingSetupController extends BaseController{
         view.getNextButton().addActionListener(this::next);
     }
 
-    private void addPlayer(ActionEvent e){
+    private void addPlayer(ActionEvent e) {
         String newPlayerName = view.getNewPlayerTF().getText();
         players.addPlayer(new Player(model.getID(), newPlayerName));
 
@@ -35,10 +35,10 @@ public class SeatingSetupController extends BaseController{
         model.incrementID();
     }
 
-    private void next(ActionEvent e){
+    private void next(ActionEvent e) {
         addPlayersToPlayerPositionsMap();
 
-        if(validPlayerSelection()) {
+        if (validPlayerSelection()) {
             if (view.getNorthButton().isSelected()) {
                 model.setStartingBidderPosition(Position.NORTH);
             } else if (view.getEastButton().isSelected()) {
@@ -52,12 +52,12 @@ public class SeatingSetupController extends BaseController{
                 return;
             }
             mainWindowController.switchScene(BiddingView.class);
-            System.out.println("Bid starts at "+ model.getStartingBidderPosition() +" with " + model.getPlayerPositionsMap().get(model.getStartingBidderPosition()));
+            System.out.println("Bid starts at " + model.getStartingBidderPosition() + " with " + model.getPlayerPositionsMap().get(model.getStartingBidderPosition()));
         }
     }
 
-    private boolean validPlayerSelection(){
-        if(model.getPlayerPositionsMap().size() == 4){
+    private boolean validPlayerSelection() {
+        if (model.getPlayerPositionsMap().size() == 4) {
             return true;
         } else {
             System.out.println("Duplicate player selected, unable to proceed");
@@ -65,7 +65,7 @@ public class SeatingSetupController extends BaseController{
         }
     }
 
-    private void addPlayersToPlayerPositionsMap(){
+    private void addPlayersToPlayerPositionsMap() {
         model.putPlayerPosition(Position.NORTH, (Player) view.getCbxNorth().getSelectedItem());
         model.putPlayerPosition(Position.EAST, (Player) view.getCbxEast().getSelectedItem());
         model.putPlayerPosition(Position.SOUTH, (Player) view.getCbxSouth().getSelectedItem());

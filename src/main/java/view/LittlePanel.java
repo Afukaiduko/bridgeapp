@@ -9,7 +9,7 @@ import javax.swing.*;
  * tell it when to reload from the model.
  */
 public class LittlePanel extends BaseView {
-    private CounterModel model;
+    private final CounterModel model;
     private JLabel label;
 
     public LittlePanel(CounterModel model) {
@@ -29,7 +29,7 @@ public class LittlePanel extends BaseView {
     }
 
     @Override
-    public void onLoadedView(){
+    public void onLoadedView() {
 
     }
 

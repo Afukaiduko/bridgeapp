@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CounterView extends BaseView {
-    private CounterModel model;
+    private final CounterModel model;
 
     private LittlePanel littlePanel;
 
@@ -54,7 +54,7 @@ public class CounterView extends BaseView {
 
         Image suitImg = CardImageLoader.getInstance().getSuitImg(Suit.HEART);
         ImageIcon heart = new ImageIcon(suitImg);
-        testBidButton = new JButton("1",heart);
+        testBidButton = new JButton("1", heart);
 
         // Setup a sub component of this class. Make sure it's added as a subview so it's properly refreshed!
         littlePanel = new LittlePanel(model);
@@ -97,8 +97,9 @@ public class CounterView extends BaseView {
         this.add(cardPanel1);
         this.add(cardPanel2);
     }
+
     @Override
-    public void onLoadedView(){
+    public void onLoadedView() {
 
     }
 
@@ -114,5 +115,7 @@ public class CounterView extends BaseView {
         return switchToFastCounterButton;
     }
 
-    public JButton getBridgeButton(){return bridgeButton;}
+    public JButton getBridgeButton() {
+        return bridgeButton;
+    }
 }

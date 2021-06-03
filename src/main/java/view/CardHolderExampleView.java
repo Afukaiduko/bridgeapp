@@ -17,7 +17,7 @@ import java.util.TreeSet;
  * (Sortin the cards and making it so that they go in order)
  */
 public class CardHolderExampleView extends CardHolder {
-    private SortedSet<CardView> cards;
+    private final SortedSet<CardView> cards;
 
     public CardHolderExampleView() {
         cards = new TreeSet<>();
@@ -35,7 +35,7 @@ public class CardHolderExampleView extends CardHolder {
     }
 
     @Override
-    public void onLoadedView(){
+    public void onLoadedView() {
 
     }
 

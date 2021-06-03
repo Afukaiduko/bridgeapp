@@ -7,17 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FastCounterView extends BaseView {
+    private final CounterModel model;
     private JLabel titleLabel;
     private JLabel counterLabel;
     private JButton incrementButton;
-
     private JLabel incrementByLabel;
     private JTextField incrementByField;
-
     private JLabel warningLabel;
     private JButton switchToCounterButton;
-
-    private CounterModel model;
 
     public FastCounterView(CounterModel model) {
         this.model = model;
@@ -68,7 +65,7 @@ public class FastCounterView extends BaseView {
     }
 
     @Override
-    public void onLoadedView(){
+    public void onLoadedView() {
 
     }
 

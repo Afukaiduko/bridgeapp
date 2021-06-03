@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainWindowController {
-    private Map<Class, BaseView> viewsMap;
-    private MainWindow window;
+    private final Map<Class, BaseView> viewsMap;
+    private final MainWindow window;
 
     public MainWindowController(MainWindow window) {
         this.window = window;

@@ -1,43 +1,36 @@
 package view;
 
+import enums.Position;
 import enums.Suit;
 import model.*;
-
-import javax.swing.*;
-
-import enums.Position;
 import utils.CardImageLoader;
 import utils.CompUtils;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BiddingView extends BaseView {
-    private SeatingOrderModel seatingOrderModel;
-    private BiddingModel biddingModel;
-
+    private final SeatingOrderModel seatingOrderModel;
+    private final BiddingModel biddingModel;
+    private final ArrayList<NormalBid> possibleNormalBids;
+    private final Map<JButton, Integer> normalBidButtons;
     private JPanel innerPanel;
     private JPanel playersPanel;
     private JPanel normalBidsPanel;
     private JPanel undoDoublePassPanel;
-
     private JLabel north;
     private JLabel east;
     private JLabel south;
     private JLabel west;
-
     private JLabel northName;
     private JLabel eastName;
     private JLabel southName;
     private JLabel westName;
     private JLabel star;
-
     private Position startingPosition;
-
-    private ArrayList<NormalBid> possibleNormalBids;
-    private Map<JButton, Integer> normalBidButtons;
     private int incrementRowBy;
     private int shiftStarting;
 
@@ -118,7 +111,7 @@ public class BiddingView extends BaseView {
 
         CompUtils.add(playersPanel, innerPanel, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(normalBidsPanel, innerPanel, 0, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(undoDoublePassPanel, innerPanel, 0, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(undoDoublePassPanel, innerPanel, 0, 2, 1, 1, 1, 2, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(innerPanel, this, 0, 1, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
     }
 
@@ -174,7 +167,7 @@ public class BiddingView extends BaseView {
     }
 
     private void updateBidButtons() {
-        if(!finished) {
+        if (!finished) {
             nextButton.setVisible(false);
             nextButton.setText("Next");
             passButton.setEnabled(true);
@@ -183,11 +176,7 @@ public class BiddingView extends BaseView {
                 if (latestBid == null) {
                     entry.getKey().setEnabled(true);
                     doubleButton.setEnabled(false);
-                } else if (entry.getValue() <= possibleNormalBids.indexOf(latestNormalBid)) {
-                    entry.getKey().setEnabled(false);
-                } else {
-                    entry.getKey().setEnabled(true);
-                }
+                } else entry.getKey().setEnabled(entry.getValue() > possibleNormalBids.indexOf(latestNormalBid));
             }
             if (latestBid instanceof DoubleBid) {
                 if (((DoubleBid) latestBid).getIsRedouble()) {
@@ -211,7 +200,7 @@ public class BiddingView extends BaseView {
             doubleButton.setEnabled(false);
             passButton.setEnabled(false);
             nextButton.setVisible(true);
-            if(fourPass){
+            if (fourPass) {
                 nextButton.setText("Finish");
             }
         }
@@ -246,12 +235,16 @@ public class BiddingView extends BaseView {
         playersPanel.remove(((Bid) biddingModel.getBiddingSequence().get(biddingModel.getLastIndex())).getLabel());
     }
 
+    public Bid getLatestBid() {
+        return latestBid;
+    }
+
     public void setLatestBid(Bid latestBid) {
         this.latestBid = latestBid;
     }
 
-    public Bid getLatestBid() {
-        return latestBid;
+    public NormalBid getLatestNormalBid() {
+        return latestNormalBid;
     }
 
     public void setLatestNormalBid(NormalBid latestNormalBid) {
@@ -278,19 +271,19 @@ public class BiddingView extends BaseView {
         return passButton;
     }
 
-    public JButton getNextButton(){
+    public JButton getNextButton() {
         return nextButton;
     }
 
-    public void setFinished(boolean value){
+    public void setFinished(boolean value) {
         this.finished = value;
     }
 
-    public void setFourPass(boolean value){
-        this.fourPass = value;
+    public boolean isFourPass() {
+        return fourPass;
     }
 
-    public boolean isFourPass(){
-        return fourPass;
+    public void setFourPass(boolean value) {
+        this.fourPass = value;
     }
 }

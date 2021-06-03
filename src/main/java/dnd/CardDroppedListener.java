@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class CardDroppedListener implements DropTargetListener, Serializable {
 
-    private CardHolder target;
+    private final CardHolder target;
 
     public CardDroppedListener(CardHolder target) {
         this.target = target;

@@ -11,8 +11,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 
 public class FastCounterController extends BaseController {
-    private CounterModel model;
-    private FastCounterView view;
+    private final CounterModel model;
+    private final FastCounterView view;
 
     private int iCountBy;
 

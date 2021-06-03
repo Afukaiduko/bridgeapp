@@ -2,14 +2,14 @@ package model;
 
 import javax.swing.*;
 
-public class PassBid extends Bid{
-    private JLabel passLabel;
+public class PassBid extends Bid {
+    private final JLabel passLabel;
 
-    public PassBid(){
+    public PassBid() {
         this.passLabel = new JLabel("Pass");
     }
 
-    public JLabel getLabel(){
+    public JLabel getLabel() {
         return passLabel;
     }
 

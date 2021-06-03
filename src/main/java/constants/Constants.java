@@ -23,7 +23,7 @@ public class Constants {
     public static final int CARD_WIDTH = 60;
     public static final int CARD_HEIGHT = 100;
 
-    public static final DataFlavor CARD_FLAVOR =  new DataFlavor(CardView.class, CardView.class.getSimpleName());
+    public static final DataFlavor CARD_FLAVOR = new DataFlavor(CardView.class, CardView.class.getSimpleName());
 
 
 }

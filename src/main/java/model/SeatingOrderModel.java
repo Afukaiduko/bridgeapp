@@ -8,38 +8,38 @@ import java.util.Map;
 
 
 public class SeatingOrderModel {
+    private final Map<Position, Player> playerPositions;
     private int nextID;
     private Position startingBidderPosition;
-    private Map<Position, Player> playerPositions;
 
-    public SeatingOrderModel(PlayerDatabase model){
+    public SeatingOrderModel(PlayerDatabase model) {
         this.nextID = model.getNumberOfPlayers() + 1;
         this.playerPositions = new HashMap<>();
     }
 
-    public void incrementID(){
+    public void incrementID() {
         nextID++;
     }
 
-    public int getID(){
+    public int getID() {
         return nextID;
     }
 
-    public void setStartingBidderPosition(Position p){
-        startingBidderPosition = p;
-    }
-
-    public Position getStartingBidderPosition(){
+    public Position getStartingBidderPosition() {
         return startingBidderPosition;
     }
 
-    public void putPlayerPosition(Position position, Player player){
+    public void setStartingBidderPosition(Position p) {
+        startingBidderPosition = p;
+    }
+
+    public void putPlayerPosition(Position position, Player player) {
         if (playerPositions.containsValue(player)) {
             Iterator<Map.Entry<Position, Player>> iterator = playerPositions.entrySet().iterator();
 
-            while(iterator.hasNext()){
-                Map.Entry<Position,Player> entry = iterator.next();
-                if(player.equals(entry.getValue())){
+            while (iterator.hasNext()) {
+                Map.Entry<Position, Player> entry = iterator.next();
+                if (player.equals(entry.getValue())) {
                     iterator.remove();
                 }
             }
@@ -47,7 +47,7 @@ public class SeatingOrderModel {
         playerPositions.put(position, player);
     }
 
-    public Map<Position, Player> getPlayerPositionsMap(){
+    public Map<Position, Player> getPlayerPositionsMap() {
         return playerPositions;
     }
 }

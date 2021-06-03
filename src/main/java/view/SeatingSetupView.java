@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class SeatingSetupView extends BaseView {
-    private PlayerDatabase playerDatabase;
+    private final PlayerDatabase playerDatabase;
 
     private JLabel titleLabel;
     private JLabel north;
@@ -34,13 +34,13 @@ public class SeatingSetupView extends BaseView {
 
     private JButton nextButton;
 
-    public SeatingSetupView(PlayerDatabase players){
+    public SeatingSetupView(PlayerDatabase players) {
         this.playerDatabase = players;
         initializeView();
     }
 
     @Override
-    public void initializeView(){
+    public void initializeView() {
 
         titleLabel = new JLabel("Seating Order");
 
@@ -73,35 +73,35 @@ public class SeatingSetupView extends BaseView {
         newPlayerTF = new JTextField();
         addPlayerButton = new JButton("Enter");
 
-        CompUtils.add(titleLabel, this,0,0,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(nextButton, this,1,0,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(titleLabel, this, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(nextButton, this, 1, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
-        CompUtils.add(north,innerPanel,1,0,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(east,innerPanel,1,1,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(south,innerPanel,1,2,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(west,innerPanel,1,3,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(north, innerPanel, 1, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(east, innerPanel, 1, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(south, innerPanel, 1, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(west, innerPanel, 1, 3, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
-        CompUtils.add(northButton,innerPanel,3,0,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(eastButton,innerPanel,3,1,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(southButton,innerPanel,3,2,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(westButton,innerPanel,3,3,1,1,1,1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(northButton, innerPanel, 3, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(eastButton, innerPanel, 3, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(southButton, innerPanel, 3, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(westButton, innerPanel, 3, 3, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
-        CompUtils.add(cbxNorth, innerPanel,2,0,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(cbxEast, innerPanel,2,1,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(cbxSouth, innerPanel,2,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(cbxWest, innerPanel,2,3,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(cbxNorth, innerPanel, 2, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(cbxEast, innerPanel, 2, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(cbxSouth, innerPanel, 2, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(cbxWest, innerPanel, 2, 3, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
-        CompUtils.add(innerPanel,this,0,1,1,1,1,1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
+        CompUtils.add(innerPanel, this, 0, 1, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
 
-        CompUtils.add(registerNewPlayerLabel, this,0,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(newPlayerTF, this,1,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(addPlayerButton, this,2,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(registerNewPlayerLabel, this, 0, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(newPlayerTF, this, 1, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(addPlayerButton, this, 2, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         initializePlayerComboBox();
     }
 
     @Override
-    public void onLoadedView(){
+    public void onLoadedView() {
 
     }
 
@@ -115,50 +115,50 @@ public class SeatingSetupView extends BaseView {
         }
     }
 
-    public void addLatestPlayerToComboBox(){
+    public void addLatestPlayerToComboBox() {
         cbxNorth.addItem(playerDatabase.getLatestPlayer());
         cbxEast.addItem(playerDatabase.getLatestPlayer());
         cbxSouth.addItem(playerDatabase.getLatestPlayer());
         cbxWest.addItem(playerDatabase.getLatestPlayer());
     }
 
-    public JRadioButton getNorthButton(){
+    public JRadioButton getNorthButton() {
         return northButton;
     }
 
-    public JRadioButton getEastButton(){
+    public JRadioButton getEastButton() {
         return eastButton;
     }
 
-    public JRadioButton getSouthButton(){
+    public JRadioButton getSouthButton() {
         return southButton;
     }
 
-    public JRadioButton getWestButton(){
+    public JRadioButton getWestButton() {
         return westButton;
     }
 
-    public JTextField getNewPlayerTF(){
+    public JTextField getNewPlayerTF() {
         return newPlayerTF;
     }
 
-    public JButton getAddPlayerButton(){
+    public JButton getAddPlayerButton() {
         return addPlayerButton;
     }
 
-    public JButton getNextButton(){
+    public JButton getNextButton() {
         return nextButton;
     }
 
-    public JComboBox getCbxNorth(){
+    public JComboBox getCbxNorth() {
         return cbxNorth;
     }
 
-    public JComboBox getCbxEast(){
+    public JComboBox getCbxEast() {
         return cbxEast;
     }
 
-    public JComboBox getCbxSouth(){
+    public JComboBox getCbxSouth() {
         return cbxSouth;
     }
 

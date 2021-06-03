@@ -21,10 +21,8 @@ public class CardImageLoader {
     public static final String HEART_FILE = IMAGES_ROOT + "/HEARTS.jpg";
     public static final String DIAMOND_FILE = IMAGES_ROOT + "/DIAMONDS.jpg";
     public static final String CLUB_FILE = IMAGES_ROOT + "/CLUBS.jpg";
-
-    private Map<Suit, Image> suitImgs;
-
     private static CardImageLoader instance;
+    private final Map<Suit, Image> suitImgs;
 
     private CardImageLoader() {
         suitImgs = new HashMap<>();

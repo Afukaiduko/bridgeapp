@@ -14,8 +14,8 @@ import java.awt.dnd.DragSource;
 import java.util.Objects;
 
 public class CardView extends JLabel implements Comparable {
-    private Suit suit;
-    private Rank rank;
+    private final Suit suit;
+    private final Rank rank;
 
     public CardView(Suit suit, Rank rank) {
         this.suit = suit;

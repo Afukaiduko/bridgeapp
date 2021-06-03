@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerDatabase {
-    private List<Player> players;
+    private final List<Player> players;
 
     public PlayerDatabase() {
-        players  = new ArrayList<>();
+        players = new ArrayList<>();
     }
 
-    public int getNumberOfPlayers(){
+    public int getNumberOfPlayers() {
         return players.size();
     }
 
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         players.add(player);
     }
 
-    public Player getLatestPlayer(){
-        return players.get(players.size()-1);
+    public Player getLatestPlayer() {
+        return players.get(players.size() - 1);
     }
 }

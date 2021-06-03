@@ -13,7 +13,7 @@ public class HomeView extends BaseView {
     private JButton historyButton;
     private JButton statsButton;
 
-    public HomeView(){
+    public HomeView() {
         initializeView();
     }
 
@@ -24,23 +24,23 @@ public class HomeView extends BaseView {
 
         JPanel innerPanel = new JPanel();
 
-        CompUtils.add(titleLabel, innerPanel, 0, 0,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(newGameButton, innerPanel, 0,1,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(replayAGameButton, innerPanel, 0,2,1,1,1,1,GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(titleLabel, innerPanel, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(newGameButton, innerPanel, 0, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(replayAGameButton, innerPanel, 0, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         CompUtils.add(innerPanel, this, 0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 200, 200, 200, 200);
     }
 
     @Override
-    public void onLoadedView(){
+    public void onLoadedView() {
 
     }
 
-    public JButton getNewGameButton(){
+    public JButton getNewGameButton() {
         return newGameButton;
     }
 
-    public JButton getReplayAGameButton(){
+    public JButton getReplayAGameButton() {
         return replayAGameButton;
     }
 

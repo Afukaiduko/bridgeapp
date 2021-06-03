@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class BaseView extends JPanel {
     protected List<BaseView> subViews;
 
-    public BaseView(){
+    public BaseView() {
         subViews = new ArrayList<>();
     }
 

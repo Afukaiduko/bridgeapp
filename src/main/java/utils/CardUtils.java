@@ -1,6 +1,5 @@
 package utils;
 
-import enums.Rank;
 import view.CardView;
 
 public class CardUtils {

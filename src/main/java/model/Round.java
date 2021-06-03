@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Round {
 
-    private Position starting;
+    private final Position starting;
     private ArrayList<Card> played;
 
     public Round(Position starting) {

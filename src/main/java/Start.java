@@ -1,7 +1,10 @@
 import com.formdev.flatlaf.FlatLightLaf;
 import controller.*;
 import io.IOManager;
-import model.*;
+import model.BiddingModel;
+import model.CounterModel;
+import model.PlayerDatabase;
+import model.SeatingOrderModel;
 import view.*;
 
 import javax.swing.*;

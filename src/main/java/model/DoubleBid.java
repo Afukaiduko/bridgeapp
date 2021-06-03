@@ -2,30 +2,30 @@ package model;
 
 import javax.swing.*;
 
-public class DoubleBid extends Bid{
+public class DoubleBid extends Bid {
 
-    private JLabel doubleLabel;
-    private boolean isRedouble;
+    private final JLabel doubleLabel;
+    private final boolean isRedouble;
 
-    public DoubleBid(boolean isRedouble){
+    public DoubleBid(boolean isRedouble) {
         this.isRedouble = isRedouble;
-        if(isRedouble) {
+        if (isRedouble) {
             this.doubleLabel = new JLabel("XX");
         } else {
             this.doubleLabel = new JLabel("X");
         }
     }
 
-    public boolean getIsRedouble(){
+    public boolean getIsRedouble() {
         return isRedouble;
     }
 
-    public JLabel getLabel(){
+    public JLabel getLabel() {
         return doubleLabel;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return doubleLabel.getText();
     }
 }

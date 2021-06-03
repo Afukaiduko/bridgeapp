@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class TransferCard implements Transferable {
 
-    private CardView c;
+    private final CardView c;
 
     public TransferCard(CardView c) {
         this.c = c;
