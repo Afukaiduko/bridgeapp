@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class uses the singleton pattern in order to not reload the cards more than once (this class is only ever creaed
+ * This class uses the singleton pattern in order to not reload the cards more than once (this class is only ever created
  * once). Honestly the singleton pattern is a bit outdated, but it's the easiest pattern to use here to get the idea across
  * so I'm still using it here as a demo.
  */

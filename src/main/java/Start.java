@@ -44,11 +44,15 @@ public class Start {
             BiddingView biddingView = new BiddingView(biddingModel, seatingOrderModel);
             BiddingController biddingController = new BiddingController(controller, biddingModel, biddingView);
 
+            InGameView inGameView = new InGameView(biddingModel, seatingOrderModel);
+            InGameController inGameController = new InGameController(controller, inGameView);
+
             controller.registerScene(CounterView.class, counterView);
             controller.registerScene(FastCounterView.class, fastCounterView);
             controller.registerScene(HomeView.class, homeView);
             controller.registerScene(SeatingSetupView.class, seatingSetupView);
             controller.registerScene(BiddingView.class, biddingView);
+            controller.registerScene(InGameView.class, inGameView);
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 // Do stuff before the app shuts down

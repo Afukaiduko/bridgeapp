@@ -96,6 +96,12 @@ public class CounterView extends BaseView {
         cardPanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.add(cardPanel1);
         this.add(cardPanel2);
+
+        //Test code for DeckHolderView
+        DeckHolderView heartPanel = new DeckHolderView();
+        heartPanel.setPreferredSize(new Dimension(875, 115));
+        heartPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.add(heartPanel);
     }
 
     @Override

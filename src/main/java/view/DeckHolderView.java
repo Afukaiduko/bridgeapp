@@ -2,6 +2,8 @@ package view;
 
 import dnd.CardDroppedListener;
 import dnd.CardHolder;
+import enums.Rank;
+import enums.Suit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,17 +12,13 @@ import java.awt.dnd.DropTarget;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-/**
- * An example of CardHolder - aka a JPanel that can accept cards dropped into it.
- * <p>
- * TODO - Customize this layout so that the cards are rendered as needed
- * (Sorting the cards and making it so that they go in order)
- */
-public class CardHolderExampleView extends CardHolder {
+public class DeckHolderView extends CardHolder {
     private final SortedSet<CardView> cards;
+    private Suit suitSelected;
 
-    public CardHolderExampleView() {
-        cards = new TreeSet<>();
+    public DeckHolderView() {
+        this.cards = new TreeSet<>();
+        this.suitSelected = Suit.SPADE;
 
         initializeView();
 
@@ -31,6 +29,15 @@ public class CardHolderExampleView extends CardHolder {
     @Override
     protected void initializeView() {
         this.setLayout(new FlowLayout());
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        for (Rank rank : Rank.values()) {
+            cards.add(new CardView(Suit.SPADE, rank));
+            cards.add(new CardView(Suit.HEART, rank));
+            cards.add(new CardView(Suit.DIAMOND, rank));
+            cards.add(new CardView(Suit.CLUB, rank));
+        }
+
         reloadCards();
     }
 
@@ -43,7 +50,9 @@ public class CardHolderExampleView extends CardHolder {
         SwingUtilities.invokeLater(() -> {
             this.removeAll();
             for (CardView c : cards) {
-                this.add(c);
+                if( c.getSuit() == suitSelected){
+                    this.add(c);
+                }
             }
             // Force component to update
             this.repaint();
@@ -66,6 +75,15 @@ public class CardHolderExampleView extends CardHolder {
             return;
         }
         cards.remove(card);
+        reloadCards();
+    }
+
+    public Suit getSelectedSuit(){
+        return suitSelected;
+    }
+
+    public void switchSuits(Suit suit){
+        this.suitSelected = suit;
         reloadCards();
     }
 }

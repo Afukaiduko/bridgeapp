@@ -3,6 +3,7 @@ package controller;
 import enums.ContractDouble;
 import model.*;
 import view.BiddingView;
+import view.InGameView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,7 @@ public class BiddingController extends BaseController {
             } else {
                 contract = new Contract(view.getLatestNormalBid(), ContractDouble.NOT_DOUBLED, false);
             }
-            //mainWindowController.switchScene(InGameView.class);
+            mainWindowController.switchScene(InGameView.class);
         }
         model.setContract(contract);
     }
