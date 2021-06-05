@@ -1,19 +1,21 @@
 package enums;
 
 public enum Position {
-    NORTH, EAST, SOUTH, WEST;
+    NORTH, EAST, SOUTH, WEST {
+        @Override
+        public Position next() {
+            return values()[0];
+        }
+    };
 
-    /*
-    NORTH(0), EAST(1), SOUTH(2), WEST(3);
-
-    private final int value;
-
-    Position(int value){
-        this.value = value;
+    public Position next() {
+        return values()[ordinal() + 1];
     }
 
-    public int getValue(){
-        return this.value;
+    public Position previous() {
+        if(values()[ordinal()] == NORTH){
+            return WEST;
+        }
+        return values()[ordinal()-1];
     }
-    */
 }

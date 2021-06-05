@@ -30,6 +30,7 @@ public class BiddingController extends BaseController {
         Contract contract;
         if (view.isFourPass()) {
             contract = new Contract(null, null, view.isFourPass());
+            model.setContract(contract);
             //mainWindowController.switchScene(GameResultView.class);
         } else {
             if (model.isDoubled()) {
@@ -41,15 +42,19 @@ public class BiddingController extends BaseController {
             } else {
                 contract = new Contract(view.getLatestNormalBid(), ContractDouble.NOT_DOUBLED, false);
             }
+            model.setContract(contract);
+            model.setDirection();
+            model.setStartingPlayerPosition();
             mainWindowController.switchScene(InGameView.class);
         }
-        model.setContract(contract);
     }
 
     private void handleDoubleButton(ActionEvent e) {
         DoubleBid doubleBid;
         boolean isRedouble = view.getLatestBid() instanceof DoubleBid;
         doubleBid = new DoubleBid(isRedouble);
+        doubleBid.setPosition(view.getLatestPosition());
+        view.incrementLatestPosition();
         model.addBid(doubleBid);
         view.setLatestBid(doubleBid);
         view.refresh();
@@ -57,6 +62,8 @@ public class BiddingController extends BaseController {
 
     private void handlePassButton(ActionEvent e) {
         PassBid pass = new PassBid();
+        pass.setPosition(view.getLatestPosition());
+        view.incrementLatestPosition();
         model.addBid(pass);
         view.setLatestBid(pass);
         checkIfFinished();
@@ -73,7 +80,8 @@ public class BiddingController extends BaseController {
                 view.setLatestBid(null);
             }
             model.remove(lastIndex);
-            view.setLatestNormalBid(findLatestNormalBid());
+            view.setLatestNormalBid(model.findLatestNormalBid());
+            view.decrementLatestPosition();
         }
         view.setFinished(false);
         view.refresh();
@@ -90,20 +98,13 @@ public class BiddingController extends BaseController {
         int bidIndex = indexOfPressedButton(e);
         if (bidIndex != -1) {
             NormalBid bidClicked = view.getPossibleNormalBids().get(bidIndex);
+            bidClicked.setPosition(view.getLatestPosition());
+            view.incrementLatestPosition();
             model.addBid(bidClicked);
             view.setLatestBid(bidClicked);
             view.setLatestNormalBid(bidClicked);
             view.refresh();
         }
-    }
-
-    private NormalBid findLatestNormalBid() {
-        for (int i = model.getBiddingSequence().size() - 1; i >= 0; i--) {
-            if (model.getBiddingSequence().get(i) instanceof NormalBid) {
-                return (NormalBid) model.getBiddingSequence().get(i);
-            }
-        }
-        return null;
     }
 
     private int indexOfPressedButton(ActionEvent e) {

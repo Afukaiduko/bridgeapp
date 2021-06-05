@@ -26,11 +26,15 @@ public class InGameView extends BaseView {
     private JButton switchToDiamondButton;
     private JButton switchToClubButton;
 
+    private JLabel contractLabel;
+    private ImageIcon contractIcon;
+
+
 
     public InGameView(BiddingModel biddingModel, SeatingOrderModel seatingOrderModel) {
         this.biddingModel = biddingModel;
         this.seatingOrderModel = seatingOrderModel;
-        this.game = new Game();
+        this.game = new Game(biddingModel.getContract(), biddingModel.getDirection());
         this.deckView = new DeckHolderView();
         this.playerCardViews = new HashMap<>();
 
@@ -96,7 +100,7 @@ public class InGameView extends BaseView {
 
     @Override
     public void onLoadedView() {
-
+        contractLabel = new JLabel("Contract: "+biddingModel.getContract()+" "+biddingModel.getDirection());
     }
 
     public JButton getSwitchToSpadeButton() {

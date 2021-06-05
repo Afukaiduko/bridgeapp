@@ -24,9 +24,10 @@ public class Round {
     }
 
     /*
-    *  Note: largest is initially set to largest card. If currentCard and largest are the same suit, then we compare ranks.
-    *  If largest and currentCard have different suits and currentCard is trumpSuit, then largest becomes currentCard
-    * */
+    *  Note: largest is initially set to starting player's card. If currentCard and largest are the same suit, then we compare ranks.
+    *  If largest and currentCard have different suits and currentCard is trumpSuit, then largest becomes currentCard (and thus largest's
+    *  suit will be trumpSuit, and so only cards have same suit as trumpSuit will be compared thereafter)
+    */
     public void findCapturer() {
         Card largest = cardsPlayed.get(starting);
         Card currentCard;

@@ -31,6 +31,7 @@ public class BiddingView extends BaseView {
     private JLabel westName;
     private JLabel star;
     private Position startingPosition;
+    private Position latestPosition;
     private int incrementRowBy;
     private int shiftStarting;
 
@@ -128,6 +129,7 @@ public class BiddingView extends BaseView {
         CompUtils.add(westName, playersPanel, 3, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         startingPosition = seatingOrderModel.getStartingBidderPosition();
+        latestPosition = startingPosition;
 
         if (startingPosition == Position.NORTH) {
             CompUtils.add(star, playersPanel, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
@@ -285,5 +287,19 @@ public class BiddingView extends BaseView {
 
     public void setFourPass(boolean value) {
         this.fourPass = value;
+    }
+
+    public void incrementLatestPosition(){
+        latestPosition = latestPosition.next();
+        System.out.println(latestPosition);
+    }
+
+    public void decrementLatestPosition(){
+        latestPosition = latestPosition.previous();
+        System.out.println(latestPosition);
+    }
+
+    public Position getLatestPosition(){
+        return latestPosition;
     }
 }

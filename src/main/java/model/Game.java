@@ -12,8 +12,13 @@ public class Game {
     private int tricksNS;
     private int tricksEW;
     private Direction winner;
+    private Direction contractors;
 
-    public Game(){
+    public Game(Contract contract,Direction contractors){
+        this.contract = contract;
+        this.contractors = contractors;
+        this.tricksNS = 0;
+        this.tricksEW = 0;
         this.rounds = new ArrayList<>();
     }
 
@@ -29,6 +34,7 @@ public class Game {
 
     public void calculateWinner(){
         int tricksNeeded = 6 + contract.getContractBid().getCallNumber();
+
 
     }
 }

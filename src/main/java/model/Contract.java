@@ -21,4 +21,9 @@ public class Contract {
     public ContractDouble getContractDouble() {
         return this.contractDouble;
     }
+
+    @Override
+    public String toString(){
+        return contractBid.toString();
+    }
 }

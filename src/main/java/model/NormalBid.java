@@ -39,7 +39,7 @@ public class NormalBid extends Bid {
 
     @Override
     public String toString() {
-        return "" + callNumber + suit;
+        return "" + callNumber + " " + suit;
     }
 
     @Override
