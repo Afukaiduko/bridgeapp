@@ -9,7 +9,7 @@ public class InGameController extends BaseController {
 
     private final InGameView view;
 
-    public InGameController(MainWindowController mainWindowController, InGameView view){
+    public InGameController(MainWindowController mainWindowController, InGameView view) {
         super(mainWindowController);
         this.view = view;
 
@@ -19,27 +19,27 @@ public class InGameController extends BaseController {
         view.getSwitchToClubButton().addActionListener(this::switchToClub);
     }
 
-    private void switchTo(Suit suit){
-        if(view.getSelectedSuit() != suit){
+    private void switchTo(Suit suit) {
+        if (view.getSelectedSuit() != suit) {
             view.switchSuits(suit);
             view.revalidate();
             view.repaint();
         }
     }
 
-    private void switchToSpade(ActionEvent e){
+    private void switchToSpade(ActionEvent e) {
         switchTo(Suit.SPADE);
     }
 
-    private void switchToHeart(ActionEvent e){
+    private void switchToHeart(ActionEvent e) {
         switchTo(Suit.HEART);
     }
 
-    private void switchToDiamond(ActionEvent e){
+    private void switchToDiamond(ActionEvent e) {
         switchTo(Suit.DIAMOND);
     }
 
-    private void switchToClub(ActionEvent e){
+    private void switchToClub(ActionEvent e) {
         switchTo(Suit.CLUB);
     }
 }

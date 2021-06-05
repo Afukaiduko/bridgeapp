@@ -11,9 +11,8 @@ public class Constants {
 
     public static final String SAVE_DIRECTORY = "bridgeapp/data";
     public static final String COUNTER_FILE = "counter.json";
-
-    public static final String PLAYERS_SAVE_DIRECTORY = "bridgeapp/data";
     public static final String PLAYERS_FILE = "players.json";
+    public static final String GAMES_FILE = "games.json";
 
 
     public static final String FONT_FAMILY = "Times New Roman";

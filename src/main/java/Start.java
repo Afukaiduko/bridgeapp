@@ -1,10 +1,7 @@
 import com.formdev.flatlaf.FlatLightLaf;
 import controller.*;
 import io.IOManager;
-import model.BiddingModel;
-import model.CounterModel;
-import model.PlayerDatabase;
-import model.SeatingOrderModel;
+import model.*;
 import view.*;
 
 import javax.swing.*;
@@ -25,13 +22,13 @@ public class Start {
             // Setup models, views, and controllers.
             CounterModel counterModel = ioManager.readCounterModel();
             PlayerDatabase playerDatabase = ioManager.readPlayerDatabaseModel();
+            GamesDatabase gamesDatabase = ioManager.readGame();
 
             CounterView counterView = new CounterView(counterModel);
             CounterController counterController = new CounterController(controller, counterModel, counterView);
 
             FastCounterView fastCounterView = new FastCounterView(counterModel);
             FastCounterController fastCounterController = new FastCounterController(controller, counterModel, fastCounterView);
-
 
             HomeView homeView = new HomeView();
             HomeController homeController = new HomeController(controller, homeView);
@@ -60,6 +57,7 @@ public class Start {
                 // Save the counter model to disk before shutting down.
                 ioManager.saveCounterModel(counterModel);
                 ioManager.savePlayerDatabaseModel(playerDatabase);
+                ioManager.saveGamesDatabaseModel(gamesDatabase);
             }));
 
 

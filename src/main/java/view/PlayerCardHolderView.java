@@ -2,8 +2,6 @@ package view;
 
 import dnd.CardDroppedListener;
 import dnd.CardHolder;
-import enums.Rank;
-import enums.Suit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,13 +10,13 @@ import java.awt.dnd.DropTarget;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class DeckHolderView extends CardHolder {
-    private final SortedSet<CardView> cards;
-    private Suit suitSelected;
+public class PlayerCardHolderView extends CardHolder {
 
-    public DeckHolderView() {
+    private final SortedSet<CardView> cards;
+    private boolean displayCard;
+
+    public PlayerCardHolderView() {
         this.cards = new TreeSet<>();
-        this.suitSelected = Suit.SPADE;
 
         initializeView();
 
@@ -28,17 +26,10 @@ public class DeckHolderView extends CardHolder {
 
     @Override
     protected void initializeView() {
+        this.displayCard = true;
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        for (Rank rank : Rank.values()) {
-            cards.add(new CardView(Suit.SPADE, rank));
-            cards.add(new CardView(Suit.HEART, rank));
-            cards.add(new CardView(Suit.DIAMOND, rank));
-            cards.add(new CardView(Suit.CLUB, rank));
-        }
-
-        reloadCards();
+        this.setPreferredSize(new Dimension(70, 115));
     }
 
     @Override
@@ -49,10 +40,8 @@ public class DeckHolderView extends CardHolder {
     private void reloadCards() {
         SwingUtilities.invokeLater(() -> {
             this.removeAll();
-            for (CardView c : cards) {
-                if (c.getSuit() == suitSelected) {
-                    this.add(c);
-                }
+            if (displayCard && cards.last() != null) {
+                this.add(cards.last());
             }
             // Force component to update
             this.repaint();
@@ -78,12 +67,11 @@ public class DeckHolderView extends CardHolder {
         reloadCards();
     }
 
-    public Suit getSelectedSuit() {
-        return suitSelected;
+    public void setDisplayCard(boolean displayCard) {
+        this.displayCard = displayCard;
     }
 
-    public void switchSuits(Suit suit) {
-        this.suitSelected = suit;
-        reloadCards();
+    public boolean getDisplayCard() {
+        return this.displayCard;
     }
 }

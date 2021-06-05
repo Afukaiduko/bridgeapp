@@ -30,7 +30,7 @@ public class BiddingController extends BaseController {
         Contract contract;
         if (view.isFourPass()) {
             contract = new Contract(null, null, view.isFourPass());
-            //mainWindowController.switchScene(GameResults.class);
+            //mainWindowController.switchScene(GameResultView.class);
         } else {
             if (model.isDoubled()) {
                 if (model.isRedoubled()) {

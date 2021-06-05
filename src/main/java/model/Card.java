@@ -1,22 +1,23 @@
 package model;
 
+import enums.Rank;
 import enums.Suit;
 
 public class Card {
 
-    private int number;
+    private Rank rank;
     private Suit suit;
 
-    public void Card(int number, Suit suit) {
-        this.number = number;
+    public void Card(Rank rank, Suit suit) {
+        this.rank = rank;
         this.suit = suit;
     }
 
-    public int getCardNumber() {
-        return number;
+    public Rank getRank() {
+        return rank;
     }
 
-    public Suit getCardSuit() {
+    public Suit getSuit() {
         return suit;
     }
 }
