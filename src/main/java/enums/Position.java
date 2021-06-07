@@ -13,9 +13,9 @@ public enum Position {
     }
 
     public Position previous() {
-        if(values()[ordinal()] == NORTH){
+        if (values()[ordinal()] == NORTH) {
             return WEST;
         }
-        return values()[ordinal()-1];
+        return values()[ordinal() - 1];
     }
 }

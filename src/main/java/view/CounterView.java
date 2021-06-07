@@ -79,8 +79,6 @@ public class CounterView extends BaseView {
         // Test code for demonstrating drag and drop cards
         CardHolderExampleView cardPanel1 = new CardHolderExampleView();
         CardHolderExampleView cardPanel2 = new CardHolderExampleView();
-        PlayerCardHolderView testPlayer= new PlayerCardHolderView();
-        this.add(testPlayer);
 
         CardView c1 = new CardView(Suit.DIAMOND, Rank.KING);
         CardView c2 = new CardView(Suit.HEART, Rank.TWO);

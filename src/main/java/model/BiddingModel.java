@@ -53,21 +53,21 @@ public class BiddingModel {
         return this.get(biddingSequence.size() - 3) instanceof DoubleBid;
     }
 
-    public Direction getDirection(){
+    public Direction getDirection() {
         return direction;
     }
 
-    public Position getStartingPlayerPosition(){
+    public Position getStartingPlayerPosition() {
         return startingPlayerPosition;
     }
 
-    public void setDirection(){
-        if(contract.getContractBid().getPosition() == Position.NORTH || contract.getContractBid().getPosition() == Position.SOUTH ){
+    public void setDirection() {
+        if (contract.getContractBid().getPosition() == Position.NORTH || contract.getContractBid().getPosition() == Position.SOUTH) {
             direction = Direction.NS;
         } else {
             direction = Direction.EW;
         }
-        System.out.println("Direction: "+direction);
+        System.out.println("Direction: " + direction);
     }
 
     public NormalBid findLatestNormalBid() {
@@ -79,21 +79,21 @@ public class BiddingModel {
         return null;
     }
 
-    public void setStartingPlayerPosition(){
+    public void setStartingPlayerPosition() {
         Suit bidSuit = contract.getContractBid().getSuit();
-        for(Bid bid : biddingSequence){
-            if(bid instanceof NormalBid){
-                if(bidSuit == ((NormalBid)bid).getSuit()){
-                    if(direction == Direction.NS){
-                        if(bid.getPosition() == Position.NORTH || bid.getPosition() == Position.SOUTH){
+        for (Bid bid : biddingSequence) {
+            if (bid instanceof NormalBid) {
+                if (bidSuit == ((NormalBid) bid).getSuit()) {
+                    if (direction == Direction.NS) {
+                        if (bid.getPosition() == Position.NORTH || bid.getPosition() == Position.SOUTH) {
                             startingPlayerPosition = bid.getPosition().next();
-                            System.out.println("Starting player position: "+startingPlayerPosition);
+                            System.out.println("Starting player position: " + startingPlayerPosition);
                             return;
                         }
                     } else {
-                        if(bid.getPosition() == Position.EAST || bid.getPosition() == Position.WEST){
+                        if (bid.getPosition() == Position.EAST || bid.getPosition() == Position.WEST) {
                             startingPlayerPosition = bid.getPosition().next();
-                            System.out.println("Starting player position: "+startingPlayerPosition);
+                            System.out.println("Starting player position: " + startingPlayerPosition);
                             return;
                         }
                     }

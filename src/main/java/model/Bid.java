@@ -10,11 +10,11 @@ public abstract class Bid {
 
     public abstract JLabel getLabel();
 
-    public Position getPosition(){
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position){
+    public void setPosition(Position position) {
         this.position = position;
     }
 }

@@ -289,17 +289,15 @@ public class BiddingView extends BaseView {
         this.fourPass = value;
     }
 
-    public void incrementLatestPosition(){
+    public void incrementLatestPosition() {
         latestPosition = latestPosition.next();
-        System.out.println(latestPosition);
     }
 
-    public void decrementLatestPosition(){
+    public void decrementLatestPosition() {
         latestPosition = latestPosition.previous();
-        System.out.println(latestPosition);
     }
 
-    public Position getLatestPosition(){
+    public Position getLatestPosition() {
         return latestPosition;
     }
 }

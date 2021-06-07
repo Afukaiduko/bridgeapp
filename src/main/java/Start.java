@@ -41,8 +41,9 @@ public class Start {
             BiddingView biddingView = new BiddingView(biddingModel, seatingOrderModel);
             BiddingController biddingController = new BiddingController(controller, biddingModel, biddingView);
 
-            InGameView inGameView = new InGameView(biddingModel, seatingOrderModel);
-            InGameController inGameController = new InGameController(controller, inGameView);
+            InGameModel inGameModel = new InGameModel(seatingOrderModel, biddingModel);
+            InGameView inGameView = new InGameView(inGameModel, seatingOrderModel, biddingModel);
+            InGameController inGameController = new InGameController(controller, inGameView, inGameModel);
 
             controller.registerScene(CounterView.class, counterView);
             controller.registerScene(FastCounterView.class, fastCounterView);

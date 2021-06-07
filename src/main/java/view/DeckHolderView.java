@@ -86,4 +86,9 @@ public class DeckHolderView extends CardHolder {
         this.suitSelected = suit;
         reloadCards();
     }
+
+    public void addBackToDeck(CardView card) {
+        cards.add(card);
+        reloadCards();
+    }
 }

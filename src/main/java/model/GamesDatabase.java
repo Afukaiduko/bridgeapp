@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GamesDatabase {
     /*
     //TODO: change from list to something that is better sorted

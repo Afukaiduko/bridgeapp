@@ -23,7 +23,7 @@ public class Contract {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return contractBid.toString();
     }
 }

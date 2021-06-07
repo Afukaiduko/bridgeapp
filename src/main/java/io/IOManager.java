@@ -3,7 +3,6 @@ package io;
 import com.google.gson.Gson;
 import constants.Constants;
 import model.CounterModel;
-import model.Game;
 import model.GamesDatabase;
 import model.PlayerDatabase;
 
@@ -88,7 +87,7 @@ public class IOManager {
         return model; // Technically can combine with above line, but writing explicitly here as an example to be more clear
     }
 
-    public void saveGamesDatabaseModel(GamesDatabase model){
+    public void saveGamesDatabaseModel(GamesDatabase model) {
         // Convert Java object type to JSON string.
         String json = gson.toJson(model);
 

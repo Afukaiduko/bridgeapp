@@ -5,10 +5,10 @@ import enums.Suit;
 
 public class Card {
 
-    private Rank rank;
-    private Suit suit;
+    private final Rank rank;
+    private final Suit suit;
 
-    public void Card(Rank rank, Suit suit) {
+    public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
     }
@@ -19,5 +19,10 @@ public class Card {
 
     public Suit getSuit() {
         return suit;
+    }
+
+    @Override
+    public String toString() {
+        return "" + suit + " " + rank;
     }
 }
