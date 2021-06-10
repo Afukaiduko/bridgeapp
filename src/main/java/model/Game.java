@@ -43,6 +43,20 @@ public class Game {
 
     public void calculateWinner() {
         int tricksNeeded = 6 + contract.getContractBid().getCallNumber();
+        if (contractors == Direction.NS) {
+            if (tricksNS >= tricksNeeded) {
+                winner = Direction.NS;
+            } else {
+                winner = Direction.EW;
+            }
+        } else {
+            if (tricksEW >= tricksNeeded) {
+                winner = Direction.EW;
+            } else {
+                winner = Direction.NS;
+            }
+        }
+        System.out.println("Direction that won is: " + winner);
     }
 
     public void incrementTricksNS() {
@@ -53,11 +67,23 @@ public class Game {
         tricksEW++;
     }
 
+    public void decrementTricksNS() {
+        tricksNS--;
+    }
+
+    public void decrementTricksEW() {
+        tricksEW--;
+    }
+
     public int getTricksNS() {
         return tricksNS;
     }
 
     public int getTricksEW() {
         return tricksEW;
+    }
+
+    public List<Round> getRounds() {
+        return rounds;
     }
 }

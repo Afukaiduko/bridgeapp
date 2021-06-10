@@ -8,6 +8,7 @@ public class InGameModel {
     private final SeatingOrderModel seatingOrderModel;
     private Game game;
     private Position startingPlayerPosition;
+    private boolean finished;
 
     public InGameModel(SeatingOrderModel seatingOrderModel, BiddingModel biddingModel) {
         this.biddingModel = biddingModel;

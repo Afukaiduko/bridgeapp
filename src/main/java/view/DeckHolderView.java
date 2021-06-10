@@ -91,4 +91,8 @@ public class DeckHolderView extends CardHolder {
         cards.add(card);
         reloadCards();
     }
+
+    public int getDeckSize() {
+        return cards.size();
+    }
 }

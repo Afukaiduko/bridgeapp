@@ -6,10 +6,12 @@ import model.Card;
 import model.Game;
 import model.InGameModel;
 import model.Round;
+import view.CardView;
 import view.HomeView;
 import view.InGameView;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.Map;
 
 public class InGameController extends BaseController {
@@ -35,26 +37,47 @@ public class InGameController extends BaseController {
         Game game = model.getGame();
         Round round = new Round(model.getStartingPlayerPosition(), model.getGame().getContract().getContractBid().getSuit());
         Map<Position, Card> cards = view.getCards();
-
-        for (Map.Entry<Position, Card> entry : cards.entrySet()) {
-            round.addCard(entry.getKey(), entry.getValue());
+        if (cards != null) {
+            for (Map.Entry<Position, Card> entry : cards.entrySet()) {
+                round.addCard(entry.getKey(), entry.getValue());
+            }
+            round.findCapturer();
+            if (round.getCapturer() == Position.NORTH || round.getCapturer() == Position.SOUTH) {
+                game.incrementTricksNS();
+            } else {
+                game.incrementTricksEW();
+            }
+            model.setStartingPlayerPosition(round.getCapturer());
+            game.addRound(round);
+            view.resetPlayerCardViews();
+            if (view.isFinished()) {
+                model.getGame().calculateWinner();
+                //mainWindowController.switchScene(GameResultView.class);
+            }
+            view.refresh();
         }
-
-        round.findCapturer();
-        if (round.getCapturer() == Position.NORTH || round.getCapturer() == Position.SOUTH) {
-            game.incrementTricksNS();
-        } else {
-            game.incrementTricksEW();
-        }
-        System.out.println("Trick taken by " + round.getCapturer());
-        model.setStartingPlayerPosition(round.getCapturer());
-        game.addRound(round);
-        view.resetPlayerCardViews();
-        view.refresh();
     }
 
     private void handlePreviousRound(ActionEvent e) {
+        Game game = model.getGame();
+        List<Round> rounds = game.getRounds();
 
+        if (rounds.size() > 0) {
+            Round previousRound = rounds.get(rounds.size() - 1);
+            Map<Position, Card> cardsPlayedLastRound = previousRound.getCardsPlayed();
+            model.setStartingPlayerPosition(previousRound.getStarting());
+            game.removeLastRound();
+            for (Position p : Position.values()) {
+                view.getPlayerCardViews().get(p).forceAddCard(new CardView(cardsPlayedLastRound.get(p).getSuit(), cardsPlayedLastRound.get(p).getRank()));
+            }
+
+            if (previousRound.getCapturer() == Position.NORTH || previousRound.getCapturer() == Position.SOUTH) {
+                game.decrementTricksNS();
+            } else {
+                game.decrementTricksEW();
+            }
+            view.refresh();
+        }
     }
 
     private void switchTo(Suit suit) {

@@ -57,4 +57,12 @@ public class Round {
     public Position getCapturer() {
         return this.capturer;
     }
+
+    public Map<Position, Card> getCardsPlayed() {
+        return cardsPlayed;
+    }
+
+    public Position getStarting() {
+        return starting;
+    }
 }

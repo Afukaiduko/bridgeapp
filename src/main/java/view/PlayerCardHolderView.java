@@ -10,8 +10,8 @@ import java.awt.dnd.DropTarget;
 
 public class PlayerCardHolderView extends CardHolder {
 
-    private CardView card;
     private final DeckHolderView deck;
+    private CardView card;
 
     public PlayerCardHolderView(DeckHolderView deck) {
         this.deck = deck;
@@ -20,6 +20,10 @@ public class PlayerCardHolderView extends CardHolder {
 
         CardDroppedListener cardDroppedListener = new CardDroppedListener(this);
         DropTarget dt = new DropTarget(this, DnDConstants.ACTION_MOVE, cardDroppedListener, true, null);
+    }
+
+    public void forceAddCard(CardView card) {
+        acceptCard(card);
     }
 
     @Override

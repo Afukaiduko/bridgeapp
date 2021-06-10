@@ -14,6 +14,7 @@ import java.util.Map;
 public class InGameView extends BaseView {
     private final DeckHolderView deckView;
     private final Map<Position, PlayerCardHolderView> playerCardViews;
+    private final Map<Position, JPanel> playerPanels;
 
     private final InGameModel inGameModel;
     private final BiddingModel biddingModel;
@@ -27,7 +28,6 @@ public class InGameView extends BaseView {
     private JButton homeButton;
     private JButton previousRoundButton;
     private JButton nextRoundButton;
-    private JButton finishGame;
 
     private JPanel gameplayPanel;
     private JPanel deckPanel;
@@ -36,6 +36,7 @@ public class InGameView extends BaseView {
     private JLabel tricksEWLabel;
     private ImageIcon contractIcon;//??might not do
 
+    private boolean finished;
 
     public InGameView(InGameModel inGameModel, SeatingOrderModel seatingOrderModel, BiddingModel biddingModel) {
         this.inGameModel = inGameModel;
@@ -43,6 +44,8 @@ public class InGameView extends BaseView {
         this.biddingModel = biddingModel;
         this.deckView = new DeckHolderView();
         this.playerCardViews = new HashMap<>();
+        this.playerPanels = new HashMap<>();
+        this.finished = false;
 
         initializeView();
     }
@@ -71,9 +74,9 @@ public class InGameView extends BaseView {
         tricksEWLabel = new JLabel();
 
         homeButton = new JButton("Home");
+        homeButton.setEnabled(false);
         previousRoundButton = new JButton("Previous Round");
         nextRoundButton = new JButton("Next Round");
-        finishGame = new JButton("Finish");
 
         setSuitButtonIcon(switchToSpadeButton, Suit.SPADE);
         setSuitButtonIcon(switchToHeartButton, Suit.HEART);
@@ -95,25 +98,46 @@ public class InGameView extends BaseView {
         CompUtils.add(tricksNSLabel, gameplayPanel, 6, 5, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(tricksEWLabel, gameplayPanel, 6, 6, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(nextRoundButton, gameplayPanel, 3, 3, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(finishGame, gameplayPanel, 3, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        finishGame.setVisible(false);
 
         CompUtils.add(menusPanel, gameplayPanel, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(deckPanel, this, 0, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-
     }
 
     private void createPlayerCardHolderViews() {
+        JPanel positionPanel;
+        boolean below;
         for (Position p : Position.values()) {
             playerCardViews.put(p, new PlayerCardHolderView(deckView));
+            positionPanel = new JPanel();
+            below = p != Position.SOUTH;
+            addToPositionPanel(playerCardViews.get(p), positionPanel, below);
+            playerPanels.put(p, positionPanel);
         }
 
-        CompUtils.add(playerCardViews.get(Position.NORTH), gameplayPanel, 3, 1, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
-        CompUtils.add(playerCardViews.get(Position.EAST), gameplayPanel, 6, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
-        CompUtils.add(playerCardViews.get(Position.SOUTH), gameplayPanel, 3, 5, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
-        CompUtils.add(playerCardViews.get(Position.WEST), gameplayPanel, 0, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        CompUtils.add(playerPanels.get(Position.NORTH), gameplayPanel, 3, 1, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        CompUtils.add(playerPanels.get(Position.EAST), gameplayPanel, 6, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        CompUtils.add(playerPanels.get(Position.SOUTH), gameplayPanel, 3, 5, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        CompUtils.add(playerPanels.get(Position.WEST), gameplayPanel, 0, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
 
         CompUtils.add(gameplayPanel, this, 0, 0, 1, 1, 1, 4, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+    }
+
+    private void createPlayerLabels() {
+        JLabel playerLabel;
+        boolean below;
+        for (Position p : Position.values()) {
+            playerLabel = new JLabel("" + p + ": " + seatingOrderModel.getPlayerPositionsMap().get(p));
+            below = p == Position.SOUTH;
+            addToPositionPanel(playerLabel, playerPanels.get(p), below);
+        }
+    }
+
+    private void addToPositionPanel(JComponent toAdd, JPanel addTo, boolean below) {
+        if (below) {
+            CompUtils.add(toAdd, addTo, 0, 1, 1, 1, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        } else {
+            CompUtils.add(toAdd, addTo, 0, 0, 1, 1, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        }
     }
 
     private void setSuitButtonIcon(JButton button, Suit suit) {
@@ -128,14 +152,26 @@ public class InGameView extends BaseView {
         contractLabel.setText("Contract: " + biddingModel.getContract() + " " + biddingModel.getDirection());
         inGameModel.setGame(new Game(biddingModel.getContract(), biddingModel.getDirection(), seatingOrderModel.getPlayerPositionsMap()));
         inGameModel.setStartingPlayerPosition(biddingModel.getStartingPlayerPosition());
+        createPlayerLabels();
     }
 
     @Override
     public void refresh() {
         super.refresh();
+        updateButton();
         updateTricksTaken();
         repaint();
         revalidate();
+    }
+
+    public void updateButton() {
+        if (deckView.getDeckSize() <= 4) {
+            nextRoundButton.setText("Finish");
+            finished = true;
+        } else {
+            nextRoundButton.setText("Next Round");
+            finished = false;
+        }
     }
 
     public void updateTricksTaken() {
@@ -188,8 +224,19 @@ public class InGameView extends BaseView {
     public Map<Position, Card> getCards() {
         Map<Position, Card> cards = new HashMap<>();
         for (Map.Entry<Position, PlayerCardHolderView> entry : playerCardViews.entrySet()) {
+            if (entry.getValue().getCard() == null) {
+                return null;
+            }
             cards.put(entry.getKey(), new Card(entry.getValue().getCard().getRank(), entry.getValue().getCard().getSuit()));
         }
         return cards;
+    }
+
+    public Map<Position, PlayerCardHolderView> getPlayerCardViews() {
+        return playerCardViews;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 }
