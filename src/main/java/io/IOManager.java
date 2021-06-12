@@ -88,7 +88,7 @@ public class IOManager {
         // Convert json string to model
         GamesDatabase model = gson.fromJson(json, GamesDatabase.class);
         System.out.println(json);
-        System.out.println("Games Loaded: "+model.getNumGames());
+        System.out.println("Games Loaded: " + model.getNumGames());
         return model; // Technically can combine with above line, but writing explicitly here as an example to be more clear
     }
 

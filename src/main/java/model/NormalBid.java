@@ -1,10 +1,6 @@
 package model;
 
 import enums.Suit;
-import utils.CardImageLoader;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class NormalBid extends Bid {
     private final Suit suit;
@@ -14,7 +10,6 @@ public class NormalBid extends Bid {
         this.callNumber = callNumber;
         this.suit = suit;
     }
-
 
 
     public Suit getSuit() {

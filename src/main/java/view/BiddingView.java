@@ -10,8 +10,8 @@ import utils.CompUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BiddingView extends BaseView {
@@ -221,7 +221,7 @@ public class BiddingView extends BaseView {
         }
 
         int offset = bidSequence.size() + shiftStarting;
-        for (int i = 0; i < 4-(offset % 4); i++) {
+        for (int i = 0; i < 4 - (offset % 4); i++) {
             CompUtils.add(new JPanel(), bidsPanel, (offset + i) % 4, (offset + i) / 4, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         }
     }

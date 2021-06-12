@@ -160,8 +160,10 @@ public class InGameView extends BaseView {
         super.refresh();
         updateButton();
         updateTricksTaken();
-        repaint();
-        revalidate();
+        SwingUtilities.invokeLater(() -> {
+            repaint();
+            revalidate();
+        });
     }
 
     public void updateButton() {
@@ -176,7 +178,7 @@ public class InGameView extends BaseView {
 
     public boolean boardIsEmpty() {
         for (Map.Entry<Position, PlayerCardHolderView> entry : playerCardViews.entrySet()) {
-            if(entry.getValue().getCard() != null){
+            if (entry.getValue().getCard() != null) {
                 return false;
             }
         }

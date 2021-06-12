@@ -23,7 +23,7 @@ public class CounterController extends BaseController {
         view.getSwitchToFastCounterButton().addActionListener((evt) -> mainWindowController.switchScene(FastCounterView.class));
 
         view.getBridgeButton().addActionListener((evt) -> mainWindowController.switchScene(HomeView.class));
-        view.getGameResultsButton().addActionListener((evt)->mainWindowController.switchScene(GameResultsView.class));
+        view.getGameResultsButton().addActionListener((evt) -> mainWindowController.switchScene(GameResultsView.class));
     }
 
     private void handleIncrement(ActionEvent evt) {

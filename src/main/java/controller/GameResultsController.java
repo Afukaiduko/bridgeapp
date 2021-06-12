@@ -10,7 +10,7 @@ public class GameResultsController extends BaseController {
     private final BiddingModel biddingModel;
     private final SeatingOrderModel seatingOrderModel;
     private final GamesDatabase gamesDatabase;
-    private GameResultsView view;
+    private final GameResultsView view;
 
     public GameResultsController(MainWindowController mainWindowController, GameResultsView view, InGameModel inGameModel, BiddingModel biddingModel, SeatingOrderModel seatingOrderModel, GamesDatabase gamesDatabase) {
         super(mainWindowController);

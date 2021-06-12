@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class Round {
 
-    private Suit trumpSuit;
-    private Position starting;
-    private Map<Position, Card> cardsPlayed;
+    private final Suit trumpSuit;
+    private final Position starting;
+    private final Map<Position, Card> cardsPlayed;
     private Position capturer;
 
     public Round(Position starting, Suit trumpSuit) {

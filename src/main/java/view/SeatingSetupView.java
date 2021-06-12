@@ -6,7 +6,7 @@ import utils.CompUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 
 public class SeatingSetupView extends BaseView {
     private final PlayerDatabase playerDatabase;
@@ -66,6 +66,7 @@ public class SeatingSetupView extends BaseView {
         group.add(eastButton);
         group.add(southButton);
         group.add(westButton);
+        northButton.setSelected(true);
 
         JPanel innerPanel = new JPanel();
 
@@ -105,13 +106,22 @@ public class SeatingSetupView extends BaseView {
 
     }
 
-    public void initializePlayerComboBox() {
-        ArrayList<Player> players = (ArrayList<Player>) playerDatabase.getPlayers();
+    private void initializePlayerComboBox() {
+        List<Player> players = playerDatabase.getPlayers();
         for (Player player : players) {
             cbxNorth.addItem(player);
             cbxEast.addItem(player);
             cbxSouth.addItem(player);
             cbxWest.addItem(player);
+        }
+        if (players.size() > 1) {
+            cbxEast.setSelectedItem(players.get(1));
+        }
+        if (players.size() > 2) {
+            cbxSouth.setSelectedItem(players.get(2));
+        }
+        if (players.size() > 3) {
+            cbxWest.setSelectedItem(players.get(3));
         }
     }
 

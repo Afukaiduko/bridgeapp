@@ -6,17 +6,17 @@ import java.util.List;
 public class GamesDatabase {
 
     //TODO: change from list to something that is better sorted
-    private List<SaveGame> games;
+    private final List<SaveGame> games;
 
-    public GamesDatabase(){
+    public GamesDatabase() {
         games = new ArrayList<>();
     }
 
-    public void addGame(SaveGame game){
+    public void addGame(SaveGame game) {
         games.add(game);
     }
 
-    public int getNumGames(){
+    public int getNumGames() {
         return games.size();
     }
 }

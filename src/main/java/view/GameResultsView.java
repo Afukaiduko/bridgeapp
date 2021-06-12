@@ -57,15 +57,17 @@ public class GameResultsView extends BaseView {
     }
 
     @Override
-    public void refresh(){
+    public void refresh() {
         super.refresh();
         updateButtons();
-        repaint();
-        revalidate();
+        SwingUtilities.invokeLater(() -> {
+            repaint();
+            revalidate();
+        });
     }
 
-    private void updateButtons(){
-        if(answeredSaveGame){
+    private void updateButtons() {
+        if (answeredSaveGame) {
 
         }
     }
@@ -86,7 +88,7 @@ public class GameResultsView extends BaseView {
         return reviewGameButton;
     }
 
-    public void setAnsweredSaveGame(boolean answeredSaveGame){
+    public void setAnsweredSaveGame(boolean answeredSaveGame) {
         this.answeredSaveGame = answeredSaveGame;
     }
 }

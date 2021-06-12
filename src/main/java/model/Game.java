@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class Game {
 
-    private List<Round> rounds;
-    private Contract contract;
-    private Map<Position, Player> playerPositions;
-    private Direction contractors;
+    private final List<Round> rounds;
+    private final Contract contract;
+    private final Map<Position, Player> playerPositions;
+    private final Direction contractors;
     private int tricksNS;
     private int tricksEW;
     private Direction winner;
@@ -59,7 +59,7 @@ public class Game {
         System.out.println("Direction that won is: " + winner);
     }
 
-    public String getOverUnderContract(){
+    public String getOverUnderContract() {
         int tricksNeeded = 6 + contract.getContractBid().getCallNumber();
         int overUnder;
         if (contractors == Direction.NS) {
@@ -68,10 +68,10 @@ public class Game {
             overUnder = tricksEW - tricksNeeded;
         }
 
-        if(overUnder < 0){
-            return "-"+overUnder;
+        if (overUnder < 0) {
+            return "-" + overUnder;
         } else {
-            return "+"+overUnder;
+            return "+" + overUnder;
         }
     }
 
@@ -103,11 +103,11 @@ public class Game {
         return rounds;
     }
 
-    public Direction getContractors(){
+    public Direction getContractors() {
         return this.contractors;
     }
 
-    public Direction getWinner(){
+    public Direction getWinner() {
         return this.winner;
     }
 }

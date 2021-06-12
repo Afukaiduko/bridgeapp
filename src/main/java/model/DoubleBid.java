@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.*;
-
 public class DoubleBid extends Bid {
 
     private final boolean isRedouble;
@@ -16,7 +14,7 @@ public class DoubleBid extends Bid {
 
     @Override
     public String toString() {
-        if(isRedouble){
+        if (isRedouble) {
             return "XX";
         } else {
             return "X";
