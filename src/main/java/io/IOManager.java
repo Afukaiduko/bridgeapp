@@ -1,7 +1,9 @@
 package io;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import constants.Constants;
+import model.Bid;
 import model.CounterModel;
 import model.GamesDatabase;
 import model.PlayerDatabase;
@@ -16,7 +18,9 @@ public class IOManager {
     private final MyWriter writer;
 
     public IOManager() {
-        gson = new Gson();
+        gson = new GsonBuilder()
+                .registerTypeAdapter(Bid.class, new BidAdapter())
+                .create();
         reader = new MyReader();
         writer = new MyWriter();
     }
