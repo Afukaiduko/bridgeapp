@@ -22,7 +22,7 @@ public class Start {
             // Setup models, views, and controllers.
             CounterModel counterModel = ioManager.readCounterModel();
             PlayerDatabase playerDatabase = ioManager.readPlayerDatabaseModel();
-            GamesDatabase gamesDatabase = ioManager.readGame();
+            GamesDatabase gamesDatabase = ioManager.readGamesDatabaseModel();
 
             CounterView counterView = new CounterView(counterModel);
             CounterController counterController = new CounterController(controller, counterModel, counterView);
@@ -41,9 +41,12 @@ public class Start {
             BiddingView biddingView = new BiddingView(biddingModel, seatingOrderModel);
             BiddingController biddingController = new BiddingController(controller, biddingModel, biddingView);
 
-            InGameModel inGameModel = new InGameModel(seatingOrderModel, biddingModel);
+            InGameModel inGameModel = new InGameModel();
             InGameView inGameView = new InGameView(inGameModel, seatingOrderModel, biddingModel);
             InGameController inGameController = new InGameController(controller, inGameView, inGameModel);
+
+            GameResultsView gameResultsView = new GameResultsView(inGameModel);
+            GameResultsController gameResultsController = new GameResultsController(controller, gameResultsView, inGameModel, biddingModel, seatingOrderModel, gamesDatabase);
 
             controller.registerScene(CounterView.class, counterView);
             controller.registerScene(FastCounterView.class, fastCounterView);
@@ -51,6 +54,7 @@ public class Start {
             controller.registerScene(SeatingSetupView.class, seatingSetupView);
             controller.registerScene(BiddingView.class, biddingView);
             controller.registerScene(InGameView.class, inGameView);
+            controller.registerScene(GameResultsView.class, gameResultsView);
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 // Do stuff before the app shuts down

@@ -165,13 +165,22 @@ public class InGameView extends BaseView {
     }
 
     public void updateButton() {
-        if (deckView.getDeckSize() <= 4) {
+        if (deckView.getDeckSize() <= 4 && boardIsEmpty()) {
             nextRoundButton.setText("Finish");
             finished = true;
         } else {
             nextRoundButton.setText("Next Round");
             finished = false;
         }
+    }
+
+    public boolean boardIsEmpty() {
+        for (Map.Entry<Position, PlayerCardHolderView> entry : playerCardViews.entrySet()) {
+            if(entry.getValue().getCard() != null){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void updateTricksTaken() {

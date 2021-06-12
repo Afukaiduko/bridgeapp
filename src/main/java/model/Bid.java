@@ -8,8 +8,6 @@ public abstract class Bid {
 
     private Position position;
 
-    public abstract JLabel getLabel();
-
     public Position getPosition() {
         return position;
     }

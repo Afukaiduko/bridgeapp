@@ -3,6 +3,7 @@ package controller;
 import enums.ContractDouble;
 import model.*;
 import view.BiddingView;
+import view.GameResultsView;
 import view.InGameView;
 
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class BiddingController extends BaseController {
         if (view.isFourPass()) {
             contract = new Contract(null, null, view.isFourPass());
             model.setContract(contract);
-            //mainWindowController.switchScene(GameResultView.class);
+            mainWindowController.switchScene(GameResultsView.class);
         } else {
             if (model.isDoubled()) {
                 if (model.isRedoubled()) {
@@ -73,7 +74,7 @@ public class BiddingController extends BaseController {
     private void handleUndoButton(ActionEvent e) {
         int lastIndex = model.getLastIndex();
         if (lastIndex > -1) {
-            view.removeLatestBid();
+            //view.removeLatestBid();
             if (lastIndex > 0) {
                 view.setLatestBid(model.get(lastIndex - 1));
             } else {

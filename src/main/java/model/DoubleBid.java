@@ -4,28 +4,22 @@ import javax.swing.*;
 
 public class DoubleBid extends Bid {
 
-    private final JLabel doubleLabel;
     private final boolean isRedouble;
 
     public DoubleBid(boolean isRedouble) {
         this.isRedouble = isRedouble;
-        if (isRedouble) {
-            this.doubleLabel = new JLabel("XX");
-        } else {
-            this.doubleLabel = new JLabel("X");
-        }
     }
 
     public boolean getIsRedouble() {
         return isRedouble;
     }
 
-    public JLabel getLabel() {
-        return doubleLabel;
-    }
-
     @Override
     public String toString() {
-        return doubleLabel.getText();
+        if(isRedouble){
+            return "XX";
+        } else {
+            return "X";
+        }
     }
 }

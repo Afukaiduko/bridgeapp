@@ -59,7 +59,7 @@ public class IOManager {
         // Convert json string to model
         PlayerDatabase model = gson.fromJson(json, PlayerDatabase.class);
         System.out.println(json);
-        System.out.println(model.getNumberOfPlayers());
+        System.out.println("Number of players: " + model.getNumberOfPlayers());
         return model; // Technically can combine with above line, but writing explicitly here as an example to be more clear
     }
 
@@ -71,7 +71,7 @@ public class IOManager {
         writer.write(Constants.SAVE_DIRECTORY, Constants.PLAYERS_FILE, json);
     }
 
-    public GamesDatabase readGame() {
+    public GamesDatabase readGamesDatabaseModel() {
         Path path = Paths.get(Constants.SAVE_DIRECTORY, Constants.GAMES_FILE);
         if (!Files.exists(path)) {
             System.out.println("Games file does not exist, creating new one");
@@ -84,6 +84,7 @@ public class IOManager {
         // Convert json string to model
         GamesDatabase model = gson.fromJson(json, GamesDatabase.class);
         System.out.println(json);
+        System.out.println("Games Loaded: "+model.getNumGames());
         return model; // Technically can combine with above line, but writing explicitly here as an example to be more clear
     }
 

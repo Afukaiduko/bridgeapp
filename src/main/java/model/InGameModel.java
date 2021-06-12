@@ -4,15 +4,11 @@ import enums.Position;
 
 public class InGameModel {
 
-    private final BiddingModel biddingModel;
-    private final SeatingOrderModel seatingOrderModel;
     private Game game;
     private Position startingPlayerPosition;
     private boolean finished;
 
-    public InGameModel(SeatingOrderModel seatingOrderModel, BiddingModel biddingModel) {
-        this.biddingModel = biddingModel;
-        this.seatingOrderModel = seatingOrderModel;
+    public InGameModel() {
     }
 
     public Game getGame() {
@@ -30,5 +26,4 @@ public class InGameModel {
     public void setStartingPlayerPosition(Position startingPlayerPosition) {
         this.startingPlayerPosition = startingPlayerPosition;
     }
-
 }

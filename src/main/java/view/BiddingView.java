@@ -3,12 +3,14 @@ package view;
 import enums.Position;
 import enums.Suit;
 import model.*;
+import utils.BidLabelUtils;
 import utils.CardImageLoader;
 import utils.CompUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ public class BiddingView extends BaseView {
     private final Map<JButton, Integer> normalBidButtons;
     private JPanel innerPanel;
     private JPanel playersPanel;
+    private JPanel bidsPanel;
     private JPanel normalBidsPanel;
     private JPanel undoDoublePassPanel;
     private JLabel north;
@@ -90,6 +93,7 @@ public class BiddingView extends BaseView {
         playersPanel = new JPanel();
         normalBidsPanel = new JPanel();
         undoDoublePassPanel = new JPanel();
+        bidsPanel = new JPanel();
 
         northName = new JLabel();
         eastName = new JLabel();
@@ -111,8 +115,9 @@ public class BiddingView extends BaseView {
         createBidButtons();
 
         CompUtils.add(playersPanel, innerPanel, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(normalBidsPanel, innerPanel, 0, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(undoDoublePassPanel, innerPanel, 0, 2, 1, 1, 1, 2, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(bidsPanel, innerPanel, 0, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(normalBidsPanel, innerPanel, 0, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(undoDoublePassPanel, innerPanel, 0, 3, 1, 1, 1, 2, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(innerPanel, this, 0, 1, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 20, 20, 20, 20);
     }
 
@@ -209,12 +214,16 @@ public class BiddingView extends BaseView {
     }
 
     private void updateBidSequence() {
-        ArrayList<Bid> bidSequence = (ArrayList<Bid>) biddingModel.getBiddingSequence();
+        List<Bid> bidSequence = (ArrayList<Bid>) biddingModel.getBiddingSequence();
+        bidsPanel.removeAll();
         for (int i = 0; i < bidSequence.size(); i++) {
-            CompUtils.add(bidSequence.get(i).getLabel(), playersPanel, (i + shiftStarting) % 4, (i + shiftStarting) / 4 + 3, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+            CompUtils.add(BidLabelUtils.createLabelFromBid(bidSequence.get(i)), bidsPanel, (i + shiftStarting) % 4, (i + shiftStarting) / 4, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         }
-        revalidate();
-        repaint();
+
+        int offset = bidSequence.size() + shiftStarting;
+        for (int i = 0; i < 4-(offset % 4); i++) {
+            CompUtils.add(new JPanel(), bidsPanel, (offset + i) % 4, (offset + i) / 4, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        }
     }
 
     public void setIncrementRowBy() {
@@ -231,10 +240,14 @@ public class BiddingView extends BaseView {
         setIncrementRowBy();
         updateBidButtons();
         updateBidSequence();
+        SwingUtilities.invokeLater(() -> {
+            revalidate();
+            repaint();
+        });
     }
 
     public void removeLatestBid() {
-        playersPanel.remove(((Bid) biddingModel.getBiddingSequence().get(biddingModel.getLastIndex())).getLabel());
+        //playersPanel.remove(((Bid) biddingModel.getBiddingSequence().get(biddingModel.getLastIndex())).getLabel());
     }
 
     public Bid getLatestBid() {

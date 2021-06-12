@@ -7,6 +7,7 @@ import model.Game;
 import model.InGameModel;
 import model.Round;
 import view.CardView;
+import view.GameResultsView;
 import view.HomeView;
 import view.InGameView;
 
@@ -52,7 +53,7 @@ public class InGameController extends BaseController {
             view.resetPlayerCardViews();
             if (view.isFinished()) {
                 model.getGame().calculateWinner();
-                //mainWindowController.switchScene(GameResultView.class);
+                mainWindowController.switchScene(GameResultsView.class);
             }
             view.refresh();
         }

@@ -22,6 +22,7 @@ public class CounterView extends BaseView {
 
     private JButton bridgeButton;
     private JButton testBidButton;
+    private JButton gameResultsButton;
 
     public CounterView(CounterModel model) {
         this.model = model;
@@ -51,6 +52,7 @@ public class CounterView extends BaseView {
         switchToFastCounterButton = new JButton("Switch to Fast counting");
 
         bridgeButton = new JButton("swtich to bridge");
+        gameResultsButton = new JButton("switch to game results");
 
         Image suitImg = CardImageLoader.getInstance().getSuitImg(Suit.HEART);
         ImageIcon heart = new ImageIcon(suitImg);
@@ -72,6 +74,8 @@ public class CounterView extends BaseView {
         this.add(littlePanel);
         this.add(bridgeButton);
         this.add(testBidButton);
+        this.add(gameResultsButton);
+        gameResultsButton.setEnabled(false);
 
         testBidButton.setEnabled(false);
 
@@ -123,5 +127,9 @@ public class CounterView extends BaseView {
 
     public JButton getBridgeButton() {
         return bridgeButton;
+    }
+
+    public JButton getGameResultsButton() {
+        return gameResultsButton;
     }
 }
