@@ -110,7 +110,7 @@ public class CounterView extends BaseView {
 
     @Override
     public void onLoadedView() {
-
+        super.onLoadedView();
     }
 
     public JButton getIncrementButton() {

@@ -9,6 +9,7 @@ import java.awt.*;
 public class GameResultsView extends BaseView {
     private final InGameModel inGameModel;
 
+    private JPanel innerPanel;
     private JLabel titleLabel;
     private JLabel contractResultLabel;
     private JLabel winnerLabel;
@@ -20,10 +21,10 @@ public class GameResultsView extends BaseView {
     private JButton reviewGameButton;
 
     private boolean answeredSaveGame;
+    private boolean fourPass;
 
     public GameResultsView(InGameModel inGameModel) {
         this.inGameModel = inGameModel;
-        this.answeredSaveGame = false;
         initializeView();
     }
 
@@ -38,7 +39,7 @@ public class GameResultsView extends BaseView {
         newGameButton = new JButton("New Game");
         reviewGameButton = new JButton("Review Game");
 
-        JPanel innerPanel = new JPanel();
+        innerPanel = new JPanel();
 
         CompUtils.add(titleLabel, innerPanel, 1, 0, 3, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(contractResultLabel, innerPanel, 1, 1, 3, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
@@ -47,13 +48,30 @@ public class GameResultsView extends BaseView {
         CompUtils.add(saveGameYesButton, innerPanel, 0, 4, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(saveGameNoButton, innerPanel, 2, 4, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
+        CompUtils.add(newGameButton, innerPanel, 0, 3, 3, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(reviewGameButton, innerPanel, 0, 4, 3, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+
         CompUtils.add(innerPanel, this, 0, 0, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 50, 50, 50, 50);
     }
 
     @Override
     public void onLoadedView() {
-        contractResultLabel.setText("" + inGameModel.getGame().getContract() + inGameModel.getGame().getOverUnderContract() + " " + inGameModel.getGame().getContractors());
-        winnerLabel.setText("" + inGameModel.getGame().getWinner() + " Wins!");
+        answeredSaveGame = false;
+        fourPass = false;
+        saveGameYesButton.setVisible(true);
+        saveGameNoButton.setVisible(true);
+        saveThisGameLabel.setVisible(true);
+        newGameButton.setVisible(false);
+        reviewGameButton.setVisible(false);
+
+        if (inGameModel.getGame() != null) {
+            contractResultLabel.setText("" + inGameModel.getGame().getContract() + inGameModel.getGame().getOverUnderContract() + " " + inGameModel.getGame().getContractors());
+            winnerLabel.setText("" + inGameModel.getGame().getWinner() + " Wins!");
+        } else {
+            contractResultLabel.setText("Four Pass");
+            winnerLabel.setText("No one wins!");
+            fourPass = true;
+        }
     }
 
     @Override
@@ -68,7 +86,11 @@ public class GameResultsView extends BaseView {
 
     private void updateButtons() {
         if (answeredSaveGame) {
-
+            saveGameYesButton.setVisible(false);
+            saveGameNoButton.setVisible(false);
+            saveThisGameLabel.setVisible(false);
+            newGameButton.setVisible(true);
+            reviewGameButton.setVisible(true);
         }
     }
 
@@ -90,5 +112,9 @@ public class GameResultsView extends BaseView {
 
     public void setAnsweredSaveGame(boolean answeredSaveGame) {
         this.answeredSaveGame = answeredSaveGame;
+    }
+
+    public boolean isFourPass() {
+        return fourPass;
     }
 }

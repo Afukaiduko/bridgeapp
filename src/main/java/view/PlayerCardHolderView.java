@@ -35,7 +35,7 @@ public class PlayerCardHolderView extends CardHolder {
 
     @Override
     public void onLoadedView() {
-
+        this.card = null;
     }
 
     private void reloadCards() {

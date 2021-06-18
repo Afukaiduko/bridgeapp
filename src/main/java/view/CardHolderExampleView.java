@@ -36,7 +36,6 @@ public class CardHolderExampleView extends CardHolder {
 
     @Override
     public void onLoadedView() {
-
     }
 
     private void reloadCards() {

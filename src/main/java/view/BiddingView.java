@@ -55,7 +55,6 @@ public class BiddingView extends BaseView {
         this.finished = false;
         normalBidButtons = new HashMap<>();
         possibleNormalBids = new ArrayList<>();
-        incrementRowBy = 0;
 
         createPossibleBids();
         initializeView();
@@ -123,6 +122,13 @@ public class BiddingView extends BaseView {
 
     @Override
     public void onLoadedView() {
+        biddingModel.reset();
+        incrementRowBy = 0;
+        latestBid = null;
+        latestNormalBid = null;
+        fourPass = false;
+        finished = false;
+
         northName.setText((seatingOrderModel.getPlayerPositionsMap().get(Position.NORTH)).getName());
         eastName.setText((seatingOrderModel.getPlayerPositionsMap().get(Position.EAST)).getName());
         southName.setText((seatingOrderModel.getPlayerPositionsMap().get(Position.SOUTH)).getName());
@@ -222,7 +228,8 @@ public class BiddingView extends BaseView {
 
         int offset = bidSequence.size() + shiftStarting;
         for (int i = 0; i < 4 - (offset % 4); i++) {
-            CompUtils.add(new JPanel(), bidsPanel, (offset + i) % 4, (offset + i) / 4, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+            JPanel spacer = new JPanel();
+            CompUtils.add(spacer, bidsPanel, (offset + i) % 4, (offset + i) / 4, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         }
     }
 
@@ -244,10 +251,6 @@ public class BiddingView extends BaseView {
             revalidate();
             repaint();
         });
-    }
-
-    public void removeLatestBid() {
-        //playersPanel.remove(((Bid) biddingModel.getBiddingSequence().get(biddingModel.getLastIndex())).getLabel());
     }
 
     public Bid getLatestBid() {

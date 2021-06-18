@@ -66,7 +66,6 @@ public class FastCounterView extends BaseView {
 
     @Override
     public void onLoadedView() {
-
     }
 
     public JButton getSwitchToCounterButton() {

@@ -101,4 +101,13 @@ public class BiddingModel {
             }
         }
     }
+
+    public void reset() {
+        while (biddingSequence.size() > 0) {
+            this.biddingSequence.remove(biddingSequence.size() - 1);
+        }
+        this.contract = null;
+        this.direction = null;
+        this.startingPlayerPosition = null;
+    }
 }

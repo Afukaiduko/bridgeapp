@@ -33,7 +33,6 @@ public class HomeView extends BaseView {
 
     @Override
     public void onLoadedView() {
-
     }
 
     public JButton getNewGameButton() {

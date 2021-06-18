@@ -27,5 +27,7 @@ public abstract class BaseView extends JPanel {
      */
     protected abstract void initializeView();
 
-    public abstract void onLoadedView();
+    public void onLoadedView() {
+        subViews.forEach(view -> view.onLoadedView());
+    }
 }

@@ -42,23 +42,16 @@ public class InGameView extends BaseView {
         this.inGameModel = inGameModel;
         this.seatingOrderModel = seatingOrderModel;
         this.biddingModel = biddingModel;
-        this.deckView = new DeckHolderView();
         this.playerCardViews = new HashMap<>();
         this.playerPanels = new HashMap<>();
-        this.finished = false;
+        this.deckView = new DeckHolderView();
+        this.registerSubView(deckView);
 
         initializeView();
     }
 
     @Override
     public void initializeView() {
-        //Test
-        /*
-        CardHolderExampleView cardPanel1 = new CardHolderExampleView();
-        cardPanel1.setPreferredSize(new Dimension(300, 300));
-        cardPanel1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        CompUtils.add(cardPanel1, this, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-*/
         deckPanel = new JPanel();
         gameplayPanel = new JPanel();
 
@@ -74,7 +67,6 @@ public class InGameView extends BaseView {
         tricksEWLabel = new JLabel();
 
         homeButton = new JButton("Home");
-        homeButton.setEnabled(false);
         previousRoundButton = new JButton("Previous Round");
         nextRoundButton = new JButton("Next Round");
 
@@ -83,11 +75,11 @@ public class InGameView extends BaseView {
         setSuitButtonIcon(switchToDiamondButton, Suit.DIAMOND);
         setSuitButtonIcon(switchToClubButton, Suit.CLUB);
 
-        CompUtils.add(deckView, deckPanel, 1, 0, 1, 4, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(switchToSpadeButton, deckPanel, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(switchToHeartButton, deckPanel, 0, 1, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(switchToDiamondButton, deckPanel, 0, 2, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
-        CompUtils.add(switchToClubButton, deckPanel, 0, 3, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(deckView, deckPanel, 1, 0, 5, 4, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(switchToSpadeButton, deckPanel, 0, 0, 1, 1, 0, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(switchToHeartButton, deckPanel, 0, 1, 1, 1, 0, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(switchToDiamondButton, deckPanel, 0, 2, 1, 1, 0, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
+        CompUtils.add(switchToClubButton, deckPanel, 0, 3, 1, 1, 0, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         createPlayerCardHolderViews();
 
@@ -112,6 +104,7 @@ public class InGameView extends BaseView {
             below = p != Position.SOUTH;
             addToPositionPanel(playerCardViews.get(p), positionPanel, below);
             playerPanels.put(p, positionPanel);
+            this.registerSubView(playerCardViews.get(p));
         }
 
         CompUtils.add(playerPanels.get(Position.NORTH), gameplayPanel, 3, 1, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
@@ -149,6 +142,9 @@ public class InGameView extends BaseView {
 
     @Override
     public void onLoadedView() {
+        super.onLoadedView();
+        this.finished = false;
+
         contractLabel.setText("Contract: " + biddingModel.getContract() + " " + biddingModel.getDirection());
         inGameModel.setGame(new Game(biddingModel.getContract(), biddingModel.getDirection(), seatingOrderModel.getPlayerPositionsMap()));
         inGameModel.setStartingPlayerPosition(biddingModel.getStartingPlayerPosition());

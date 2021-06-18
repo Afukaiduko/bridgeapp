@@ -66,7 +66,6 @@ public class SeatingSetupView extends BaseView {
         group.add(eastButton);
         group.add(southButton);
         group.add(westButton);
-        northButton.setSelected(true);
 
         JPanel innerPanel = new JPanel();
 
@@ -103,7 +102,15 @@ public class SeatingSetupView extends BaseView {
 
     @Override
     public void onLoadedView() {
-
+        if (northButton.isSelected()) {
+            eastButton.setSelected(true);
+        } else if (eastButton.isSelected()) {
+            southButton.setSelected(true);
+        } else if (southButton.isSelected()) {
+            westButton.setSelected(true);
+        } else {
+            northButton.setSelected(true);
+        }
     }
 
     private void initializePlayerComboBox() {

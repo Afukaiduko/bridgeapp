@@ -6,7 +6,6 @@ public class InGameModel {
 
     private Game game;
     private Position startingPlayerPosition;
-    private boolean finished;
 
     public InGameModel() {
     }

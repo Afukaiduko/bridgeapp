@@ -18,7 +18,6 @@ public class DeckHolderView extends CardHolder {
 
     public DeckHolderView() {
         this.cards = new TreeSet<>();
-        this.suitSelected = Suit.SPADE;
 
         initializeView();
 
@@ -30,20 +29,19 @@ public class DeckHolderView extends CardHolder {
     protected void initializeView() {
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        reloadCards();
+    }
 
+    @Override
+    public void onLoadedView() {
+        this.suitSelected = Suit.SPADE;
         for (Rank rank : Rank.values()) {
             cards.add(new CardView(Suit.SPADE, rank));
             cards.add(new CardView(Suit.HEART, rank));
             cards.add(new CardView(Suit.DIAMOND, rank));
             cards.add(new CardView(Suit.CLUB, rank));
         }
-
         reloadCards();
-    }
-
-    @Override
-    public void onLoadedView() {
-
     }
 
     private void reloadCards() {
