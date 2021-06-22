@@ -46,6 +46,7 @@ public class BiddingController extends BaseController {
             model.setContract(contract);
             model.setDirection();
             model.setStartingPlayerPosition();
+            model.setDummyPosition();
             mainWindowController.switchScene(InGameView.class);
         }
     }

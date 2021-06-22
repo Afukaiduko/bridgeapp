@@ -12,6 +12,7 @@ public class BiddingModel {
     private Contract contract;
     private Direction direction;
     private Position startingPlayerPosition;
+    private Position dummyPosition;
 
     public BiddingModel() {
         biddingSequence = new ArrayList<>();
@@ -61,6 +62,9 @@ public class BiddingModel {
         return startingPlayerPosition;
     }
 
+    public Position getDummyPosition(){
+        return dummyPosition;
+    }
     public void setDirection() {
         if (contract.getContractBid().getPosition() == Position.NORTH || contract.getContractBid().getPosition() == Position.SOUTH) {
             direction = Direction.NS;
@@ -77,6 +81,37 @@ public class BiddingModel {
             }
         }
         return null;
+    }
+
+    public void setDummyPosition() {
+        Suit bidSuit = contract.getContractBid().getSuit();
+        for (Bid bid : biddingSequence) {
+            if (bid instanceof NormalBid) {
+                if (bidSuit == ((NormalBid) bid).getSuit()) {
+                    if (direction == Direction.NS) {
+                        if (bid.getPosition() == Position.NORTH) {
+                            dummyPosition = Position.SOUTH;
+                            System.out.println("Dummy position : " + dummyPosition);
+                            return;
+                        } else if (bid.getPosition() == Position.SOUTH) {
+                            dummyPosition = Position.NORTH;
+                            System.out.println("Dummy position : " + dummyPosition);
+                            return;
+                        }
+                    } else {
+                        if (bid.getPosition() == Position.EAST) {
+                            dummyPosition = Position.WEST;
+                            System.out.println("Dummy position : " + dummyPosition);
+                            return;
+                        } else if (bid.getPosition() == Position.WEST) {
+                            dummyPosition = Position.EAST;
+                            System.out.println("Dummy position : " + dummyPosition);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void setStartingPlayerPosition() {

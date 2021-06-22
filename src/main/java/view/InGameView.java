@@ -82,6 +82,7 @@ public class InGameView extends BaseView {
         CompUtils.add(switchToClubButton, deckPanel, 0, 3, 1, 1, 0, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         createPlayerCardHolderViews();
+        CompUtils.add(gameplayPanel, this, 0, 0, 1, 1, 1, 4, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
 
         CompUtils.add(homeButton, menusPanel, 0, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
         CompUtils.add(previousRoundButton, menusPanel, 1, 0, 1, 1, 1, 1, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
@@ -106,14 +107,19 @@ public class InGameView extends BaseView {
             playerPanels.put(p, positionPanel);
             this.registerSubView(playerCardViews.get(p));
         }
-
-        CompUtils.add(playerPanels.get(Position.NORTH), gameplayPanel, 3, 1, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
-        CompUtils.add(playerPanels.get(Position.EAST), gameplayPanel, 6, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
-        CompUtils.add(playerPanels.get(Position.SOUTH), gameplayPanel, 3, 5, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
-        CompUtils.add(playerPanels.get(Position.WEST), gameplayPanel, 0, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
-
-        CompUtils.add(gameplayPanel, this, 0, 0, 1, 1, 1, 4, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER);
     }
+
+    private void setPlayerCardHolderView(Position dummyPosition) {
+        Position currentPosition = dummyPosition;
+        CompUtils.add(playerPanels.get(currentPosition), gameplayPanel, 3, 5, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        currentPosition = currentPosition.next();
+        CompUtils.add(playerPanels.get(currentPosition), gameplayPanel, 0, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        currentPosition = currentPosition.next();
+        CompUtils.add(playerPanels.get(currentPosition), gameplayPanel, 3, 1, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        currentPosition = currentPosition.next();
+        CompUtils.add(playerPanels.get(currentPosition), gameplayPanel, 6, 3, 1, 2, 1, 1, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+    }
+
 
     private void createPlayerLabels() {
         JLabel playerLabel;
@@ -149,6 +155,7 @@ public class InGameView extends BaseView {
         inGameModel.setGame(new Game(biddingModel.getContract(), biddingModel.getDirection(), seatingOrderModel.getPlayerPositionsMap()));
         inGameModel.setStartingPlayerPosition(biddingModel.getStartingPlayerPosition());
         createPlayerLabels();
+        setPlayerCardHolderView(biddingModel.getDummyPosition());
     }
 
     @Override
