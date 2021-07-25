@@ -19,4 +19,8 @@ public class GamesDatabase {
     public int getNumGames() {
         return games.size();
     }
+
+    public List<SaveGame> getGames(){
+        return games;
+    }
 }

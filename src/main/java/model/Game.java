@@ -69,7 +69,7 @@ public class Game {
         }
 
         if (overUnder < 0) {
-            return "-" + overUnder;
+            return "" + overUnder;
         } else {
             return "+" + overUnder;
         }

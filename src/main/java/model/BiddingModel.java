@@ -62,9 +62,10 @@ public class BiddingModel {
         return startingPlayerPosition;
     }
 
-    public Position getDummyPosition(){
+    public Position getDummyPosition() {
         return dummyPosition;
     }
+
     public void setDirection() {
         if (contract.getContractBid().getPosition() == Position.NORTH || contract.getContractBid().getPosition() == Position.SOUTH) {
             direction = Direction.NS;

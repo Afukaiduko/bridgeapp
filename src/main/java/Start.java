@@ -48,6 +48,10 @@ public class Start {
             GameResultsView gameResultsView = new GameResultsView(inGameModel);
             GameResultsController gameResultsController = new GameResultsController(controller, gameResultsView, inGameModel, biddingModel, seatingOrderModel, gamesDatabase);
 
+            GameSelectModel gameSelectModel = new GameSelectModel();
+            GameSelectView gameSelectView = new GameSelectView(gameSelectModel, gamesDatabase);
+            GameSelectController gameSelectController = new GameSelectController(controller, gameSelectView, gameSelectModel, gamesDatabase);
+
             controller.registerScene(CounterView.class, counterView);
             controller.registerScene(FastCounterView.class, fastCounterView);
             controller.registerScene(HomeView.class, homeView);
@@ -55,6 +59,7 @@ public class Start {
             controller.registerScene(BiddingView.class, biddingView);
             controller.registerScene(InGameView.class, inGameView);
             controller.registerScene(GameResultsView.class, gameResultsView);
+            controller.registerScene(GameSelectView.class, gameSelectView);
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 // Do stuff before the app shuts down
